@@ -5,7 +5,6 @@ behave xterm
 " Updated: 10/7/2016 10:19 AM
  
 " Notes:
-"   TODO: Organize the notes section, probably delete or archive some.
  
 "   Fix "Not an editor command: ^M" message with :w ++ff=unix
 "   Logging messages.
@@ -25,63 +24,12 @@ behave xterm
 "           "Xp
 "       Likewise, put something into register X with something like "Xy or "Xd,
 "       etc.
-"   Dealing with directories/filenames:
-"       Can set variables to these, i.e.,
-"           let $myVar = expand('%:p')
-"       Current file's path:
-"           expand('%:p')
-"       Current file's directory's path:
-"           expand('%:p:h')
-"       Current file's name:
-"           expand('%:t')
-"       Current file's extension:
-"           expand('%:e')
-"       This is useful for managing multiple files at once, either in different
-"         tabs or in different windows.
-"   Managing tabs:
-"       tabe <filename>
-"           Open new tab with <filename>
-"       <#>gt
-"           Switch to tab number <#>
-"       tabm <#>
-"           Move current tab to this position number <#> (starts at 0).
-"       tabm
-"           Move current tab to end.
 "   Sessions:
 "       Make a session with ":mksession <filename>.vim"
 "       Restore a session with ":source <filename>.vim"
-"   Delete all trailing whitespace with ":%s/\s\+$//"
-"   Point vimrc file towards this file, i.e., 
-"        let $VIMDROPBOX = '/home/andrew/Dropbox/vim/_vimDropbox.vim'
-"        source $VIMDROPBOX
-"
-"   Use ":set syntax=vim" to enable syntax highlighting for vim files like this
-"     one if it doesn't already have a *.vim extension.
-"   Use ":source $MYVIMRC" to reload vimrc without having to reload the whole
-"     program.
 "   Use ":scriptnames" to view which scripts are currently being used.
-"   Use ":call" to use functions, like ":call CustomColumns()"
-"   Manually set syntax to bash with ":syntax=sh", and to vim with
-"     ":syntax=vim".
-"   Open existing file with e command.
-"   Use as file explorer by "opening" a directory, i.e., "e ." opens the
-"     explorer on the current directory.
-"       Open whatever's under the cursor with "gf".
-"   Can use some bash commands like pwd, cd, etc.
-"   Edit vimrc quickly with e $MYVIMRC.  Need to have vim open in su/admin to
-"     make changes.
-"   Use ls to list all files in the buffer.  (They're not actually still open,
-"     but more of a "recent files" type of thing.)  Use bX to switch to document X
-"     as listed there.  (Can also use n, bn, p, and bp to navigate.)
-"   When copying from email, this gets double-spaced.  Get back to normal with
-"     :g/^$/d
-"   Search multiple files with 'vimgrep /<regex here>/gj **/*.txt' (lvimgrep is
-"     similar, but doesn't save list)
-"       This stores the file list in a buffer which can be open "copen".  gf can
-"         be used to open the file under the cursor.
 "   Delete all lines that contain a flag with g/<flag>/delete, i.e.,
 "     g/\/\/\~/delete to delete all lines that contain //~.
-"   Reload previously used visual block with gv.
  
 
 " Settings
