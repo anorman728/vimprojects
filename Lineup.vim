@@ -32,6 +32,8 @@ function! LineupFunc() range
         endif
         " Todo: Test this by making sure that the results end up lining up with
         "   the colored columns from TC()
+    " Replace all tabs with spaces.
+        '<,'>s/\t/\ /g
     " Add spaces to each instance until it matches up.
         for i in range(a:firstline,a:lastline)
             call setpos('.',[0,i,0,0])
