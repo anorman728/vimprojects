@@ -6,7 +6,7 @@ function! SetLineupCharacter(lineupCharacter)
 endfunction
 
 function! GetLineupCharacter()
-    return g:lineupCharacter;
+    return g:lineupCharacter
 endfunction
 
 function! LineupFunc() range
