@@ -1,8 +1,6 @@
 set nocompatible
-"source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
 behave xterm
-" Updated: 10/7/2016 10:19 AM
+" Updated: 10/13/2016 
  
 " Notes:
  
@@ -152,6 +150,10 @@ behave xterm
     " Textwidth
         
         set textwidth=80
+
+    " Don't write netrwhist file.
+
+        let g:netrw_dirhistmax = 0
 
 " Other scripts to load.  (Must be in same directory as this file.)
 
