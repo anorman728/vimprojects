@@ -52,12 +52,8 @@ behave xterm
         set number
         
     " Shown on breaks if wordwrap is on.
-        if has("patch1-712")
-            set breakindent
-            set showbreak=\ 
-        else 
-            set showbreak=\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ >>
-        endif
+        set breakindent
+        set showbreak=\ \ 
         "set showbreak=>>
 
     " When textwidth is nonzero, don't add line breaks-- Prefer to do that with
