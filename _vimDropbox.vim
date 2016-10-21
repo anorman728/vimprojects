@@ -158,12 +158,15 @@ behave xterm
     let $lineup = $currentDir."/Lineup.vim"
     source $lineup
 
-    let $rewrap = $currentDir."/Rewrap.vim"
-    source $rewrap
+"   let $rewrap = $currentDir."/Rewrap.vim"
+"   source $rewrap
 
     let $customFunctions = $currentDir."/CustomFunctions.vim"
     source $customFunctions
 
-    let $foldModifiedIndent = $currentDir."/foldModifiedIndent.vim"
-    source $foldModifiedIndent
+"   let $foldModifiedIndent = $currentDir."/foldModifiedIndent.vim"
+"   source $foldModifiedIndent
+
+    let $docblockTools = $currentDir."/DocblockTools.vim"
+    source $docblockTools
 
