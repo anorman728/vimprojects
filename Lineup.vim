@@ -5,8 +5,16 @@ function! SetLineupCharacter(lineupCharacter)
     let g:lineupCharacter = a:lineupCharacter
 endfunction
 
+function! SLC(lineupCharacter)
+    call SetLineupCharacter(a:lineupCharacter)
+endfunction
+
 function! GetLineupCharacter()
     return g:lineupCharacter
+endfunction
+
+function! GLC()
+    return GetLineupCharacter()
 endfunction
 
 function! LineupFunc() range

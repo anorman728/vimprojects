@@ -1,8 +1,6 @@
 set nocompatible
-"source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
 behave xterm
-" Updated: 10/7/2016 10:19 AM
+" Updated: 10/13/2016 
  
 " Notes:
  
@@ -54,12 +52,8 @@ behave xterm
         set number
         
     " Shown on breaks if wordwrap is on.
-        if has("patch1-712")
-            set breakindent
-            set showbreak=\ 
-        else 
-            set showbreak=\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ >>
-        endif
+        set breakindent
+        set showbreak=\ \ 
         "set showbreak=>>
 
     " When textwidth is nonzero, don't add line breaks-- Prefer to do that with
@@ -153,6 +147,10 @@ behave xterm
         
         set textwidth=80
 
+    " Don't write netrwhist file.
+
+        let g:netrw_dirhistmax = 0
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
@@ -160,12 +158,15 @@ behave xterm
     let $lineup = $currentDir."/Lineup.vim"
     source $lineup
 
-    let $rewrap = $currentDir."/Rewrap.vim"
-    source $rewrap
+"   let $rewrap = $currentDir."/Rewrap.vim"
+"   source $rewrap
 
     let $customFunctions = $currentDir."/CustomFunctions.vim"
     source $customFunctions
 
-    let $foldModifiedIndent = $currentDir."/foldModifiedIndent.vim"
-    source $foldModifiedIndent
+"   let $foldModifiedIndent = $currentDir."/foldModifiedIndent.vim"
+"   source $foldModifiedIndent
+
+    let $docblockTools = $currentDir."/DocblockTools.vim"
+    source $docblockTools
 
