@@ -170,3 +170,8 @@ behave xterm
     let $docblockTools = $currentDir."/DocblockTools.vim"
     source $docblockTools
 
+    let $fileext = expand('%:e')
+    if $fileext=='js'
+        let $jsdoc = $currentDir."/JSdoc.vim"
+        source $jsdoc
+    endif
