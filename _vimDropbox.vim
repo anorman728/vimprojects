@@ -28,7 +28,7 @@ behave xterm
 "   Use ":scriptnames" to view which scripts are currently being used.
 "   Delete all lines that contain a flag with g/<flag>/delete, i.e.,
 "     g/\/\/\~/delete to delete all lines that contain //~.
-
+ 
 
 " Settings
 
@@ -150,6 +150,9 @@ behave xterm
     " Don't write netrwhist file.
 
         let g:netrw_dirhistmax = 0
+
+    " Set encryption method to blowfish2.
+        set cm=blowfish2
 
 " Other scripts to load.  (Must be in same directory as this file.)
 
