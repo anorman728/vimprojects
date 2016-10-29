@@ -154,6 +154,11 @@ behave xterm
     " Set encryption method to blowfish2.
         set cm=blowfish2
 
+    " Highlight ES6 template strings
+        hi link javaScriptTemplateDelim String
+        hi link javaScriptTemplateVar Text
+        hi link javaScriptTemplateString String
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
