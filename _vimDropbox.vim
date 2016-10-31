@@ -40,7 +40,7 @@ behave xterm
         if has("unix")
             set guifont=Monospace\ 13 " Linux
         else
-            set guifont=Courier\ New:h12 " Windows
+            set guifont=Consolas:h12 " Windows
         endif
         
     " Set color scheme
