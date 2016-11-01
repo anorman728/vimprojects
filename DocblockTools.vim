@@ -56,25 +56,32 @@ function! StarDestarFunc()
     " Find upper bound (numeric upper bound, not visual upper bound).
         let upperbound = currentLine
         let reachedTop = 0
-        while (!reachedTop)
+        while (!reachedTop && upperbound<=line('$'))
             let upperbound = upperbound+1
             let $test = matchstr(getline(upperbound),'^\(\s\+\)\?[*]\/')
             if !empty($test)
                 let reachedTop = 1
             endif
         endwhile
+        if upperbound>line('$')
+            throw "Not currently in a docblock."
+        endif
     " Find lower bound (numeric lower bound, not visual lower bound).
-        let lowerbound = currentLine
+        let lowerbound = upperbound
         let reachedBottom = 0
         while (!reachedBottom)
             let lowerbound = lowerbound-1
-            let $test = matchstr(getline(lowerbound),'^\(\s\+\)\?\/[*][*]')
+            let $test = matchstr(getline(lowerbound),'^\(\s\+\)\?\/[*]')
             if !empty($test)
                 let reachedBottom = 1
             endif
         endwhile
+    " Exit if cursor is not currently in a docblock.
+        if lowerbound>currentLine
+            throw "Not currently in a docblock."
+        endif
     " Get column to use to toggle asterisks.
-        let toggleCol = match(getline(lowerbound),'[*][*]')+1
+        let toggleCol = match(getline(lowerbound),'[*]')+1
     " Select visual block and toggle.
         call setpos('.',[0,lowerbound+1,toggleCol,0])
         exe "normal \<C-v>"
@@ -91,3 +98,5 @@ endfunction
 
 command! StarDestar call StarDestarFunc()
 map <F2> :StarDestar<CR>
+
+
