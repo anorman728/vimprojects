@@ -183,3 +183,6 @@ behave xterm
         let $jsdoc = $currentDir."/JSdoc.vim"
         source $jsdoc
     endif
+
+    let $deobfuscate = $currentDir."/Deobfuscate.vim"
+    source $deobfuscate
