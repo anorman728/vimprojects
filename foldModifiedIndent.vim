@@ -23,11 +23,11 @@ function! ModifiedIndent(lnum)
     let $line = getline(a:lnum)
     for $regex in g:foldignorearray
         if match($line,$regex)!=-1
-            return ModifiedIndent(a:lnum-1)
+            return ModifiedIndent(a:lnum+1)
         endif
     endfor
 
-    return indent(a:lnum)
+    return float2nr(ceil(str2float(indent(a:lnum))/str2float(&shiftwidth)))
 
 endfunction
 
