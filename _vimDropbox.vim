@@ -70,10 +70,6 @@ behave xterm
     " Use spaces instead of tabs.
         set tabstop=4 shiftwidth=4 expandtab
      
-    " Indent folding
-        set foldmethod=indent
-        set foldlevel=99
-     
     " Put swap file, etc. into temporary directory instead of the current
     " directory.
         if has("unix")
@@ -166,14 +162,8 @@ behave xterm
     let $lineup = $currentDir."/Lineup.vim"
     source $lineup
 
-"   let $rewrap = $currentDir."/Rewrap.vim"
-"   source $rewrap
-
     let $customFunctions = $currentDir."/CustomFunctions.vim"
     source $customFunctions
-
-"   let $foldModifiedIndent = $currentDir."/foldModifiedIndent.vim"
-"   source $foldModifiedIndent
 
     let $docblockTools = $currentDir."/DocblockTools.vim"
     source $docblockTools
@@ -186,3 +176,6 @@ behave xterm
 
     let $deobfuscate = $currentDir."/Deobfuscate.vim"
     source $deobfuscate
+
+    let $modifiedIndent = $currentDir."/foldModifiedIndent.vim"
+    source $modifiedIndent

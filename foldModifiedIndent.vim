@@ -1,55 +1,47 @@
-" Expression for slightly better indent folding (imo): If a line's indent level is
-"   zero, then check to see if the line above has an indent level greater than 1.
-"   If it does, then the current line will be assigned the same foldlevel as
-"   that line.  This is helpful for <<< style strings.
+"   New version: Every space at the beginning of a line is an indent level.
+"   Useful for docblocks.
 
-" Not enabled by default-- set foldmethod=expr to enable it.
-" Can really slow down large files (like the help file), so prefer to disable it by default.
-
-"set foldmethod=expr
+set foldmethod=expr
 set foldexpr=ModifiedIndent(v:lnum)
-"set foldlevel=99
+set foldlevel=99
+
+" foldignorearray defines patterns to determines what lines to ignore when
+" assigning it a fold level.  If any of these patterns are found anywhere on the
+" line, it's assigned the fold level of the line that's above it.
+" This makes it similar to foldignore, but not the same.  For one, it's an array
+" that matches patterns instead of single characters.  Secondly, it doesn't need
+" to be at the beginning of the line.  It's not necessary to make that
+" requirement since it's pattern-matching.
+
+" foldignorearray can be modified by the user on-the-fly, but it's probably
+" easier to just go ahead and modify this file instead.
+
+    let foldignorearray = ['^_','^#','^\(\s\+\)\?$']
 
 function! ModifiedIndent(lnum)
-    let currentLineIndent = GetIndentLevel(a:lnum)
 
-    if (currentLineIndent==-1 || currentLineIndent==0) && a:lnum==1
-        let currentLineIndent=0
-    endif
-
-    if a:lnum>1
-
-        if currentLineIndent==0
-            let prevLineIndent = ModifiedIndent(a:lnum-1)
-            if prevLineIndent>1
-                let currentLineIndent = prevLineIndent
-            endif
+    let $line = getline(a:lnum)
+    for $regex in g:foldignorearray
+        if match($line,$regex)!=-1
+            return ModifiedIndent(a:lnum-1)
         endif
+    endfor
 
-        if currentLineIndent==-1
-            let currentLineIndent = ModifiedIndent(a:lnum-1)
-        endif
-
-    endif
-
-    return float2nr(currentLineIndent)
+    return indent(a:lnum)
 
 endfunction
 
-function! GetIndentLevel(lnum)
-    let $linecontent = getline(a:lnum)
 
-    if ($linecontent=="")
-        return -1
-    endif
-
-    let a=0
-    while strpart($linecontent,a,1)==" "
-        let a = a+1
-    endwhile
-
-    let returnVal = floor(a/4)
-    return returnVal
-endfunction
-
-
+" Here is a previous version of the inside of the conditional.  It made the folds
+" look better, but significantly slowed down loading time for each file, so I
+" decided it wasn't a good idea.
+" Even so, I thought it would be best to put in the comments in case I decide
+" later to improve it.
+"      
+"   let prevIndent = ModifiedIndent(a:lnum-1)
+"   let nextIndent = ModifiedIndent(a:lnum+1)
+"   if prevIndent>nextIndent
+"       return prevIndent
+"   else 
+"       return nextIndent
+"   endif
