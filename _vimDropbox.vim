@@ -179,3 +179,6 @@ behave xterm
 
     let $modifiedIndent = $currentDir."/foldModifiedIndent.vim"
     source $modifiedIndent
+
+    let $Todo2Html = $currentDir."/Todo2Html.vim"
+    source $Todo2Html
