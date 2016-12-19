@@ -104,13 +104,13 @@ endfunction
 
 function! AddBlockQuote(lnNum,prevLn)
     if indent(a:lnNum)>indent(a:prevLn)
-        return "<blockquote>\r"
+        return "<div style=\"padding-left:20px;\">\r"
     elseif indent(a:lnNum)<indent(a:prevLn)
         let $returnVal = ''
         let closes = indent(a:prevLn)/&shiftwidth-indent(a:lnNum)/&shiftwidth
         let j = 0
         while j< closes
-            let $returnVal .="\r</blockquote>"
+            let $returnVal .="\r</div>"
             let j+=1
         endwhile
         return $returnVal
