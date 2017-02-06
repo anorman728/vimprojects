@@ -162,7 +162,7 @@ behave xterm
     let $lineup = $currentDir."/Lineup.vim"
     source $lineup
 
-    let $customFunctions = $currentDir."/CustomFunctions.vim"
+    let $customFunctions = $currentDir."/customFunctions.vim"
     source $customFunctions
 
     let $docblockTools = $currentDir."/DocblockTools.vim"
