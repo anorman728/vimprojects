@@ -92,11 +92,17 @@ behave xterm
     " Sometimes Vim doesn't automatically use color-coding.  This forces it.
     " (Also make sure to use opening tags in php.)
         syntax on
+
         hi Folded guibg='Black'
+        hi Folded ctermbg='Black'
             " Removes background highlighted from folded lines. (Because they're
             "   kind of annoying.)
             " Need to do this *here* rather than when setting color scheme because
             "   "syntax on" will change it back.
+
+        hi Folded guifg=#202020
+            " Experimental idea!  Darken text of folded lines so they don't get in the way.
+            " Note that can't use RGB hex values for ctermfg.
         
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
