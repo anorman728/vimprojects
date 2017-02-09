@@ -5,7 +5,13 @@
 
 function! Htmlify(outputFile)
     
+    " Delete output file if it already exists, create new file.
+        if filereadable(a:outputFile)
+            call delete(a:outputFile)
+        endif
+
     let $html = HtmlHeader()
+    call AppendToFile(a:outputFile,$html)
 
     let lines = line('$')
     let i=1
@@ -14,10 +20,11 @@ function! Htmlify(outputFile)
         let $lineDum = substitute(getline(i),'^\s\+','','g')
         if match($lineDum,'^\(\s\+\)\?\(Example\|Ex\):\(\s\+\)\?$')!=-1
             let exampleArray = GetExampleArray(i)
-            let $html .= exampleArray[0]
+            let $html = exampleArray[0]
+            call AppendToFile(a:outputFile,$html)
             let i = exampleArray[1]
         elseif match($lineDum,'^\(\s\+\)\?$')==-1
-            let $html.="\r"
+            let $html="\r"
             " Tags
                 let tags = Tags($lineDum)
             " Add blockquotes
@@ -27,16 +34,14 @@ function! Htmlify(outputFile)
             " Underlining
                 let $lineDum = AddUnderlineTags($lineDum)
             let $html .= tags[0].$lineDum.tags[1]
+            call AppendToFile(a:outputFile,$html)
             let prevLn = i
         endif
         let i +=1
     endwhile
 
-    let $html .= "\r</body>"
-
-    if writefile([$html],a:outputFile)
-        echomsg "write error"
-    endif
+    let $html = "\r</body>"
+    call AppendToFile(a:outputFile,$html)
 
 endfunction
 
@@ -146,3 +151,16 @@ function! GetExampleArray(lineNum)
     let $returnStr .= "</pre>"
     return [$returnStr,currLineNum]
 endfunction
+
+function! AppendToFile(file,message)
+    if filereadable(a:file)
+        let $writeCommand = 'w >>'
+    else
+        let $writeCommand = 'w '
+    endif
+    new
+    setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
+    put=a:message
+    execute $writeCommand a:file
+    q
+endfun
