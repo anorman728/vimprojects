@@ -1,10 +1,12 @@
 " Plugin that converts the todo format to html, and includes a reference to
 " the MathJax script.
 
-" Todo: Incorporate examples, using pre tags.  (Although this is geared for math, this could be useful for numerical analysis.)
-
 function! Htmlify(outputFile)
     
+    " Open current file in new tab.
+        let $a = expand('%')
+        tabe $a
+
     " Delete output file if it already exists, create new file.
         if filereadable(a:outputFile)
             call delete(a:outputFile)
@@ -38,10 +40,15 @@ function! Htmlify(outputFile)
             let prevLn = i
         endif
         let i +=1
+        echon "Line ".i."/".lines
     endwhile
 
     let $html = "\r</body>"
     call AppendToFile(a:outputFile,$html)
+
+    " Close newly-opened tab.
+        tabclose
+        execute ':normal gT'
 
 endfunction
 
@@ -161,6 +168,6 @@ function! AppendToFile(file,message)
     new
     setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
     put=a:message
-    execute $writeCommand a:file
+    silent exec $writeCommand a:file
     q
 endfun
