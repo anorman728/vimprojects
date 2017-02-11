@@ -100,7 +100,7 @@ behave xterm
             " Need to do this *here* rather than when setting color scheme because
             "   "syntax on" will change it back.
 
-        hi Folded guifg=#202020
+        hi Folded guifg=#353535
             " Experimental idea!  Darken text of folded lines so they don't get in the way.
             " Note that can't use RGB hex values for ctermfg.
         
