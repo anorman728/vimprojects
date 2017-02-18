@@ -1,5 +1,12 @@
 " Plugin that converts the todo format to html, and includes a reference to
 " the MathJax script.
+" Using '~' for home directory in *NIX doesn't work at the moment.
+
+if has('unix')
+    let $newline = "\n"
+else
+    let $newline = "\r\n"
+endif
 
 function! Htmlify(outputFile)
     
@@ -26,7 +33,7 @@ function! Htmlify(outputFile)
             call AppendToFile(a:outputFile,$html)
             let i = exampleArray[1]
         elseif match($lineDum,'^\(\s\+\)\?$')==-1
-            let $html="\r"
+            let $html=$newline
             " Tags
                 let tags = Tags($lineDum)
             " Add blockquotes
@@ -43,13 +50,12 @@ function! Htmlify(outputFile)
         echon "Line ".i."/".lines
     endwhile
 
-    let $html = "\r</body>"
+    let $html = $newline."</body>"
     call AppendToFile(a:outputFile,$html)
 
     " Close newly-opened tab.
         tabclose
         execute ':normal gT'
-
 endfunction
 
 function! HtmlEntities(inputStr)
@@ -61,12 +67,12 @@ function! HtmlEntities(inputStr)
 endfunction
 
 function! HtmlHeader()
-    let $html  = "\r<!DOCTYPE html>"
-    let $html .= "\r<head>"
-    let $html .= "\r<title>".expand('%:t')."</title>"
-    let $html .= "\r<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>"
-    let $html .= "\r</head>"
-    let $html .= "\r<body>"
+    let $html  = $newline."<!DOCTYPE html>"
+    let $html .= $newline."<head>"
+    let $html .= $newline."<title>".expand('%:t')."</title>"
+    let $html .= $newline."<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>"
+    let $html .= $newline."</head>"
+    let $html .= $newline."<body>"
     return $html
 endfunction
 
@@ -116,13 +122,13 @@ endfunction
 
 function! AddBlockQuote(lnNum,prevLn)
     if indent(a:lnNum)>indent(a:prevLn)
-        return "<div style=\"padding-left:20px;\">\r"
+        return "<div style=\"padding-left:20px;\">".$newline
     elseif indent(a:lnNum)<indent(a:prevLn)
         let $returnVal = ''
         let closes = indent(a:prevLn)/&shiftwidth-indent(a:lnNum)/&shiftwidth
         let j = 0
         while j< closes
-            let $returnVal .="\r</div>"
+            let $returnVal .=$newline."</div>"
             let j+=1
         endwhile
         return $returnVal
@@ -151,7 +157,7 @@ function! GetExampleArray(lineNum)
     let currLineNum = a:lineNum+1
     let currLineStr = getline(currLineNum)
     while match(currLineStr,'^\(\s\+\)\?endex')==-1
-        let $returnStr .= "\r".currLineStr
+        let $returnStr .= $newline.currLineStr
         let currLineNum+=1
         let currLineStr = getline(currLineNum)
     endwhile
