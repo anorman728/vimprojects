@@ -46,7 +46,8 @@ function! Htmlify(outputFile)
             call AppendToFile(a:outputFile,$html)
             let prevLn = i
         endif
-        let i +=1
+        let i += 1
+        redraws
         echon "Line ".i."/".lines
     endwhile
 

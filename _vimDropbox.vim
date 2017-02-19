@@ -161,6 +161,9 @@ behave xterm
         hi link javaScriptTemplateVar Text
         hi link javaScriptTemplateString String
 
+    " Don't interrupt with --MORE-- prompt
+        set nomore
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
