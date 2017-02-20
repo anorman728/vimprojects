@@ -164,6 +164,9 @@ behave xterm
     " Don't interrupt with --MORE-- prompt
         set nomore
 
+    " Remove gui toolbar from gvim (because I never use it).
+        set guioptions-=T
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
