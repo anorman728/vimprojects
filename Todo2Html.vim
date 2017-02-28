@@ -2,6 +2,8 @@
 " the MathJax script.
 " Using '~' for home directory in *NIX doesn't work at the moment.
 
+" DO NOT ESCAPE SPACES IN FILE NAMES!
+
 if has('unix')
     let $newline = "\n"
 else
@@ -172,9 +174,10 @@ function! AppendToFile(file,message)
     else
         let $writeCommand = 'w '
     endif
+    let $filePath = fnameescape(a:file)
     new
     setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
     put=a:message
-    silent exec $writeCommand a:file
+    silent exec $writeCommand.$filePath
     q
 endfun
