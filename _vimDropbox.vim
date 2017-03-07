@@ -194,3 +194,6 @@ behave xterm
 
     let $Todo2Html = $currentDir."/Todo2Html.vim"
     source $Todo2Html
+
+    let $BlogPost = $currentDir."/BlogPost.vim"
+    source $BlogPost
