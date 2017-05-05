@@ -27,8 +27,15 @@ function! ModifiedIndent(lnum)
         endif
     endfor
 
-    return float2nr(ceil(str2float(indent(a:lnum))/str2float(&shiftwidth)))
+    return ModifiedIndentLevel(a:lnum)
 
+endfunction
+
+function! ModifiedIndentLevel(lnum)
+    if a:lnum>line('$')||a:lnum<1
+        return 0
+    endif
+    return float2nr(ceil(str2float(indent(a:lnum))/str2float(&shiftwidth)))
 endfunction
 
 
