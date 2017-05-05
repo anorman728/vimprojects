@@ -4,22 +4,15 @@
 
 " DO NOT ESCAPE SPACES IN FILE NAMES!
 
-if has('unix')
-    let $newline = "\n"
-else
-    let $newline = "\r\n"
-endif
+" Source the TextManipulation plugin.
+    let $currentDir=expand("<sfile>:p:h")
+    let $textManipulation = $currentDir."/TextManipulation.vim"
+    "source $textManipulation
+    call SourceIfNotSourced($textManipulation)
 
 function! Htmlify(outputFile)
     
-    " Open current file in new tab.
-        let $a = expand('%')
-        tabe $a
-
-    " Delete output file if it already exists, create new file.
-        if filereadable(a:outputFile)
-            call delete(a:outputFile)
-        endif
+    call InitializeFile(a:outputFile)
 
     let $html = HtmlHeader()
     call AppendToFile(a:outputFile,$html)
@@ -56,9 +49,8 @@ function! Htmlify(outputFile)
     let $html = $newline."</body>"
     call AppendToFile(a:outputFile,$html)
 
-    " Close newly-opened tab.
-        tabclose
-        execute ':normal gT'
+    call FinalizeFile(a:outputFile)
+
 endfunction
 
 function! HtmlEntities(inputStr)
@@ -167,17 +159,3 @@ function! GetExampleArray(lineNum)
     let $returnStr .= "</pre>"
     return [$returnStr,currLineNum]
 endfunction
-
-function! AppendToFile(file,message)
-    if filereadable(a:file)
-        let $writeCommand = 'w >>'
-    else
-        let $writeCommand = 'w '
-    endif
-    let $filePath = fnameescape(a:file)
-    new
-    setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
-    put=a:message
-    silent exec $writeCommand.$filePath
-    q
-endfun
