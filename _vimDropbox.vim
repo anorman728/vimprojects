@@ -28,6 +28,7 @@ behave xterm
 "   Use ":scriptnames" to view which scripts are currently being used.
 "   Delete all lines that contain a flag with g/<flag>/delete, i.e.,
 "     g/\/\/\~/delete to delete all lines that contain //~.
+"   If messed up decrypt key, can retry with two commands: key=;edit (need to be on separate lines)
  
 
 " Settings
