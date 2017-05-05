@@ -1,6 +1,6 @@
 set nocompatible
 behave xterm
-" Updated: 10/13/2016 
+" Updated: 04/30/2017
  
 " Notes:
  
@@ -93,16 +93,16 @@ behave xterm
     " (Also make sure to use opening tags in php.)
         syntax on
 
+    " Removes background highlighted from folded lines. (Because they're
+    "   kind of annoying.)
+    " Need to do this *here* rather than when setting color scheme because
+    "   "syntax on" will change it back.
         hi Folded guibg='Black'
-        hi Folded ctermbg='Black'
-            " Removes background highlighted from folded lines. (Because they're
-            "   kind of annoying.)
-            " Need to do this *here* rather than when setting color scheme because
-            "   "syntax on" will change it back.
+        hi Folded ctermbg=8
 
+    " Darken text of folded lines so they don't get in the way.
         hi Folded guifg=#353535
-            " Experimental idea!  Darken text of folded lines so they don't get in the way.
-            " Note that can't use RGB hex values for ctermfg.
+        hi Folded ctermfg=Black
         
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
@@ -197,3 +197,11 @@ behave xterm
 
     let $BlogPost = $currentDir."/BlogPost.vim"
     source $BlogPost
+
+    " Incomplete
+    "let $Todo2Beamer = $currentDir."/Todo2Beamer.vim"
+    "source $Todo2Beamer
+
+    " Sandbox to quickly and easily open and source scripts.  Does not matter if
+    " already exists, as long as the location is writeable.
+    let $sandBox = $backupdir."/sandbox.vim"
