@@ -91,3 +91,25 @@
         command! -nargs=1 MoveToPreviousTabStopCmd call MoveToPreviousTabStop(<args>)
         map <S-Tab> :<C-U>MoveToPreviousTabStopCmd(v:count)<CR>
 
+    " Check if a script is already loaded and source iff not already loaded.
+    " DO NOT ESCAPE SPACES IN FILENAMES!
+
+        function! ScriptIsLoaded(filePath)
+            let $homeDir=expand('~')
+            let scriptNamesStr=""
+            redir => scriptNamesStr
+                silent execute ":scriptnames"
+            redir END
+            let scriptNamesStr=substitute(scriptNamesStr,'\~',$homeDir,'g')
+            if (scriptNamesStr =~ a:filePath)
+                return 1
+            else
+                return 0
+            endif
+        endfunction
+
+        function! SourceIfNotSourced(filePath)
+            if !(ScriptIsLoaded(a:filePath))
+                exe ":source ".a:filePath
+            endif
+        endfunction
