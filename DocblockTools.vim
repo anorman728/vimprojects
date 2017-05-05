@@ -22,7 +22,7 @@
 function! DocBlockIndentFunc()
     " Store whatever user currently has for indentexpr as variable.
         redir => previndentexpr
-        silent execute "set indentexpr?" 
+            silent execute "set indentexpr?" 
         redir END                          
         let previndentexpr = previndentexpr[1:strlen(previndentexpr)]
         " This gets rid of some weird character that screws everything up.
