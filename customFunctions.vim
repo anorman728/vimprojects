@@ -1,15 +1,5 @@
 " Functions
 
-    " Create shortcut to insert/append value in variable.
-
-        function! Insert(input)
-            exe ":normal i".a:input
-        endfunction
-        
-        function! Append(input)
-            exe ":normal a".a:input
-        endfunction
-
     " Font size function
         " It's hard as hell to remember the commands for this because it's so finicky.
         function! FontSize(newsize)
@@ -112,4 +102,13 @@
             if !(ScriptIsLoaded(a:filePath))
                 exe ":source ".a:filePath
             endif
+        endfunction
+
+    " Get value from Vim terminal output into a string.
+        
+        function! GetOutput(command)
+            redir => returnStr
+                silent execute a:command
+            redir END
+            return returnStr
         endfunction
