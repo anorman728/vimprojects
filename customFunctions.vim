@@ -105,7 +105,7 @@
         
         function! GetOutput(command)
             redir => returnStr
-                silent execute ':'.a:command
+                silent execute a:command
             redir END
             return returnStr
         endfunction

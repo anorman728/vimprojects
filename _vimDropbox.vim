@@ -199,9 +199,8 @@ behave xterm
     let $BlogPost = $currentDir."/BlogPost.vim"
     source $BlogPost
 
-    " Incomplete
-    "let $Todo2Beamer = $currentDir."/Todo2Beamer.vim"
-    "source $Todo2Beamer
+    let $Outline2Beamer = $currentDir."/Outline2Beamer.vim"
+    source $Outline2Beamer
 
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
