@@ -86,10 +86,7 @@
 
         function! ScriptIsLoaded(filePath)
             let $homeDir=expand('~')
-            let scriptNamesStr=""
-            redir => scriptNamesStr
-                silent execute ":scriptnames"
-            redir END
+            let scriptNamesStr=GetOutput("scriptnames")
             let scriptNamesStr=substitute(scriptNamesStr,'\~',$homeDir,'g')
             if (scriptNamesStr =~ a:filePath)
                 return 1
@@ -108,7 +105,7 @@
         
         function! GetOutput(command)
             redir => returnStr
-                silent execute a:command
+                silent execute ':'.a:command
             redir END
             return returnStr
         endfunction
