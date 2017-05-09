@@ -168,6 +168,9 @@ behave xterm
     " Remove gui toolbar from gvim (because I never use it).
         set guioptions-=T
 
+    " Remove search highlighting
+        set nohls
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
@@ -196,12 +199,11 @@ behave xterm
     let $Todo2Html = $currentDir."/Todo2Html.vim"
     source $Todo2Html
 
-    let $BlogPost = $currentDir."/BlogPost.vim"
-    source $BlogPost
-
     let $Outline2Beamer = $currentDir."/Outline2Beamer.vim"
     source $Outline2Beamer
 
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
     let $sandBox = $backupdir."/sandbox.vim"
+
+    au VimEnter * source $VIMDROPBOX

@@ -1,4 +1,5 @@
 " Functions to quickly convert pseudo-html to commonly-used html tags.  (For Wordpress, this is a little easier to set up than CSS classes.)
+" No longer necessary-- HTML has a <code> tag that does something very similar.
 
 function! BlogConvert()
     " Get cursor position
