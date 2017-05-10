@@ -1,9 +1,9 @@
 " Functions
 
     " Font size function
-        " It's hard as hell to remember the commands for this because it's so finicky.
+        " It's insanely hard to remember the commands for this because it's so finicky.
         function! FontSize(newsize)
-            let setfont = ":set guifont="
+            let setfont = "set guifont="
             if has("unix")
                 let fontbase = "Monospace\\\ "
             else
@@ -15,23 +15,32 @@
 
     " Custom Columns functions
 
-        " Function to enable columns demarking tabs.
-            function! TabColumns()
-                set colorcolumn=1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93,97,101
-            endfunction
-            " Alternate form to make it faster.
-            function! TC()
-                call TabColumns()
-            endfunction
-
-        " Function to enable columns demarking multiples of 10
-            function! DecColumns()
-                set colorcolumn=10,20,30,40,50,60,70,80,90,100
-            endfunction
-            " Alternate form
-            function! DC()
-                call DecColumns()
-            endfunction
+         " Function to enable columns demarking tabs.                                                                    
+            function! TabColumns()                                                                                      
+                set colorcolumn=1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,80,81,85,89,93,97,101,105,109,113,117,120,121
+            endfunction                                                                                                 
+            " Alternate form to make it faster.                                                                         
+            function! TC()                                                                                              
+                call TabColumns()                                                                                       
+            endfunction                                                                                                 
+                                                                                                                        
+        " Function to enable columns demarking multiples of 10                                                          
+            function! DecColumns()                                                                                      
+                set colorcolumn=10,20,30,40,50,60,70,80,90,100                                                          
+            endfunction                                                                                                 
+            " Alternate form                                                                                            
+            function! DC()                                                                                              
+                call DecColumns()                                                                                       
+            endfunction                                                                                                 
+                                                                                                                        
+        " Functions for standard stops.                                                                                 
+            function! StopColumns()                                                                                     
+                set cc=80,120                                                                                           
+            endfunction                                                                                                 
+            " Alternate form                                                                                            
+            function! SC()                                                                                              
+                call StopColumns()                                                                                      
+            endfunction     
            
     " Function to space according to tabstops.  (Assumes tab enters four spaces.)
         
