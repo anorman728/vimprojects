@@ -105,15 +105,16 @@ behave xterm
         hi Folded guifg=#353535
         hi Folded ctermfg=Black
         
-    " Remove weird colors for errors.
+    " Misc color settings for terminal.
+        " Remove weird colors for errors.
         hi Error ctermbg=8
         hi Error ctermfg=1
-
-    " Change special color.
-        hi Special ctermfg=2
-
-    " Correct wrong background for ignore.
+        " Correct wrong background for ignore.
         hi Ignore ctermbg=8
+        " Change special color to orange.
+        hi Special ctermfg=3
+        " Make identifier blueish.
+        hi Identifier ctermfg=6
 
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
