@@ -56,6 +56,7 @@
                 let keynum = 0
             endif
             let newColumn = currentColumn + slack + keynum*4
+            echom currentColumn
 
             let new_pos = [0,line_num,newColumn,0]
 
@@ -116,5 +117,9 @@
             redir => returnStr
                 silent execute a:command
             redir END
+            " Remove "Control" characters, i.e., ^@.
+            let returnStr = substitute(returnStr,'[[:cntrl:]]','','g')
+            " Trim.
+            let returnStr = substitute(returnStr,'^\(\s\|\s\+\)','','g')
             return returnStr
         endfunction

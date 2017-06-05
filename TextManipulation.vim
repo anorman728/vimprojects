@@ -9,7 +9,10 @@ endif
 " Create shortcut to insert/append value in variable.
 
     function! Insert(input)
+        let $indenttype = GetOutput("set autoindent?")
+        set noautoindent
         exe ":normal i".a:input
+        silent exec "set ".$indenttype
     endfunction
     
     function! Append(input)

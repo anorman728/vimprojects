@@ -182,6 +182,16 @@ behave xterm
     " Remove search highlighting
         set nohls
 
+    " Use F5 to resource vimrc.
+        
+        if !exists("*ResourceVimrcFunc")
+            function ResourceVimrcFunc()
+                source $HOME/.vimrc
+            endfunction
+
+            command! ResourceVimrc call ResourceVimrcFunc()
+            map <F5> :ResourceVimrc<CR>
+        endif
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
