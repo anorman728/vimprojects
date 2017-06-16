@@ -1,6 +1,6 @@
 " Password management (because pass is garbage).
 " Use with an encrypted file for best security.
-" Non-*nix systems will not be able to generate new passwords.
+" Not compatible with non-*nix systems.
 " call InitPasswordFile() to create file.
 " call CreatePassword(title,username) to add a password.
 " call GetPassword(title) to echo username and copy password to clipboard.
