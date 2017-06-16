@@ -20,6 +20,8 @@
 " end up having to add them after editing anyway.
 
 function! DocBlockIndentFunc()
+    " Store current position.
+        let posArr = getpos('.')
     " Store whatever user currently has for indentexpr as variable.
         redir => previndentexpr
             silent execute "set indentexpr?" 
@@ -35,7 +37,8 @@ function! DocBlockIndentFunc()
     " Reset indentexpr
         let $cmd = "silent! set ".previndentexpr
         exe $cmd
-            
+    " Reset position
+        call setpos('.',posArr)
 endfunction
 
 command! DocBlockIndent call DocBlockIndentFunc()
