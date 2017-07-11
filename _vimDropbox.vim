@@ -27,8 +27,9 @@ behave xterm
 "       Restore a session with ":source <filename>.vim"
 "   Use ":scriptnames" to view which scripts are currently being used.
 "   Delete all lines that contain a flag with g/<flag>/delete, i.e.,
-"     g/\/\/\~/delete to delete all lines that contain //~.
+"     g/<regex>/delete to delete all lines that contain match for <regex>
 "   If messed up decrypt key, can retry with two commands: key=;edit (need to be on separate lines)
+"   Reload all files in buffer with "buffdo e".
  
 
 " Settings
