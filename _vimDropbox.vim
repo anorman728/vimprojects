@@ -233,11 +233,3 @@ behave xterm
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
     let $sandBox = $backupdir."/sandbox.vim"
-
-" Plugins to load.
-
-    let $vterm = $currentDir."/plugins/vterm/plugin/vterm.vim"
-    source $vterm
-    let $vtermautoload = $currentDir."/plugins/vterm/autoload/vterm.vim"
-    source $vtermautoload
-
