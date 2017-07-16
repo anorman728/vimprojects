@@ -74,25 +74,26 @@ behave xterm
      
     " Put swap file, etc. into temporary directory instead of the current
     " directory.
-        "if has("unix")
-        "    if exists('isAndroid') && isAndroid==1
-        "        let $backupdir="/storage/emulated/0/vimtmp" " Android
-        "    else
-        "        let $backupdir="/tmp" " Linux
-        "    endif
-        "else
-        "    let $backupdir="C:\\Temp" " Windows
-        "endif
+        if has("unix")
+            if exists('isAndroid') && isAndroid==1
+                let $backupdir="/storage/emulated/0/vimtmp" " Android
+            else
+                let $backupdir="/tmp" " Linux
+            endif
+        else
+            let $backupdir="C:\\Temp" " Windows
+        endif
 
-        "if isdirectory($backupdir)
-        "    set backup backupdir=$backupdir dir=$backupdir
-        "else
-        "    echom "Warning: ".$backupdir." not found for swap files."
-        "    let $dumvar=input("Press enter to acknowledge.")
-        "endif
+        if isdirectory($backupdir)
+            set backup backupdir=$backupdir dir=$backupdir
+        else
+            echom "Warning: ".$backupdir." not found for swap files."
+            let $dumvar=input("Press enter to acknowledge.")
+        endif
 
-    " Disable temporary files (they cause more problems than they solve).
-        set nobackup
+    " Disable temporary files (if they cause more problems than they solve).
+        "set nobackup
+        "set noswapfile
         
     " Sometimes Vim doesn't automatically use color-coding.  This forces it.
     " (Also make sure to use opening tags in php.)
