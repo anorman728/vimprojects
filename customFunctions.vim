@@ -132,3 +132,12 @@
         endfunction
 
         command! OD call ODFunction()
+
+    " Change directory to current file's directory.
+
+        function! CDCFFunction()
+            let $dirPath = expand('%:h')
+            cd $dirPath
+        endfunction
+
+        command! CDCF call CDCFFunction()
