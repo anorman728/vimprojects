@@ -123,3 +123,12 @@
             let returnStr = substitute(returnStr,'^\(\s\|\s\+\)','','g')
             return returnStr
         endfunction
+
+    " Quickly open directory of current file.
+        
+        function! ODFunction()
+            let $dirPath = expand('%:h')
+            e $dirPath
+        endfunction
+
+        command! OD call ODFunction()
