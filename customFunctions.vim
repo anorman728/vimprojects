@@ -141,3 +141,12 @@
         endfunction
 
         command! CDCF call CDCFFunction()
+
+    " Change directory to current directory currently on screen (assuming using Netrw at the moment).
+
+        function! CDCDFunction()
+            let $dirPath = expand('%:p')
+            cd $dirPath
+        endfunction
+
+        command! CDCD call CDCDFunction()
