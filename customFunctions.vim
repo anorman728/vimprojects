@@ -162,3 +162,11 @@
 
             command -nargs=1 OFCD call OFCDFunction(<f-args>)
         endif
+
+    " Print working file
+
+        function! PWFFunction()
+            echo expand("%:p")
+        endfunction
+
+        command! PWF call PWFFunction()
