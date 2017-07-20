@@ -150,3 +150,13 @@
         endfunction
 
         command! CDCD call CDCDFunction()
+
+    " Open file from current directory (assuming currently in Netrw).
+
+        function! OFCDFunction(fileName)
+            let $dirPath = expand('%:p')
+			let $filePath = $dirPath.a:fileName
+            e $filePath
+        endfunction
+
+        command! -nargs=1 OFCD call OFCDFunction(<f-args>)
