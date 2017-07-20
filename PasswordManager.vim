@@ -83,3 +83,9 @@ function! GetPasswordIntermediate(lineNum)
     call system('sleep 60 && echo "" | xclip -selection c &')
     call setpos('.',[0,0,0,0])
 endfunction
+
+command! -nargs=1 GP call GetPassword(<f-args>)
+
+command! -nargs=* CP call CreatePassword(<f-args>)
+
+command! IPF call InitPasswordFile()
