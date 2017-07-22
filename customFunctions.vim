@@ -170,3 +170,13 @@
         endfunction
 
         command! PWF call PWFFunction()
+
+    " Open working file in new tab.
+        
+        function! TABFFunction()
+            let $dirPath = expand('%:p')
+            tabe $dirPath
+        endfunction
+
+        command! TABF call TABFFunction()
+
