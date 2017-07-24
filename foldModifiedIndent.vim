@@ -16,7 +16,9 @@ set foldlevel=99
 " foldignorearray can be modified by the user on-the-fly, but it's probably
 " easier to just go ahead and modify this file instead.
 
-    let foldignorearray = ['^_','^\(\s\+\)\?$','^\(\s\+\)\?\/\/']
+    " I vascillate on which I like better.
+    "let foldignorearray = ['^_','^\(\s\+\)\?$','^\(\s\+\)\?\/\/']
+    let foldignorearray = ['^_','^\(\s\+\)\?$']
 
 function! ModifiedIndent(lnum)
 
