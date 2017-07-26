@@ -28,7 +28,7 @@ behave xterm
 "   Use ":scriptnames" to view which scripts are currently being used.
 "   Delete all lines that contain a flag with g/<flag>/delete, i.e.,
 "     g/<regex>/delete to delete all lines that contain match for <regex>
-"   If messed up decrypt key, can retry with two commands: key=;edit (need to be on separate lines)
+"   If messed up decrypt key, can retry with two commands: set key=;edit (need to be on separate lines)
 "   Reload all files in buffer with "buffdo e".
  
 
