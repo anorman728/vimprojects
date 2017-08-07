@@ -42,7 +42,6 @@ function! DocBlockIndentFunc()
 endfunction
 
 command! DocBlockIndent call DocBlockIndentFunc()
-map <F3> :DocBlockIndent<CR>
 
 function! StarDestarFunc()
     " Get current position (will need to reset to this at the end)
@@ -100,6 +99,5 @@ function! StarDestarFunc()
 endfunction
 
 command! StarDestar call StarDestarFunc()
-map <F2> :StarDestar<CR>
 
 

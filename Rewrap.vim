@@ -20,6 +20,7 @@
     endfunction
 
     command! -range RewrapCmd <line1>,<line2>call RewrapFunc()
-    map <F3> :RewrapCmd<CR>
-
+    "map <F3> :RewrapCmd<CR>
+    " Commented out because not using this function anymore, and F3 is used for
+    " something else.
 

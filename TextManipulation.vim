@@ -96,3 +96,110 @@ endif
         endwhile
         return $returnStr
     endfunction
+
+" Get the word under the specified line and column.
+" "Word", here, is specifically defined as the regex acceptableCharacterReg
+    function! GetWordInPosition(line, col, acceptableCharacterReg)
+        " Get position of start of word
+        let startposition = GetStartOfWord(a:line, a:col, a:acceptableCharacterReg)
+
+        " Get position of end of word.
+        let endposition = GetEndOfWord(a:line, a:col, a:acceptableCharacterReg)
+
+        return getline(a:line)[startposition - 1:endposition - 1]
+    endfunction
+
+" Get the character in the specified line and column.
+    function! GetCharacterInPosition(line, col)
+        return getline(a:line)[a:col-1:a:col-1]
+    endfunction
+
+" Get position of start of a word in the document.
+" Here, "word" is defined specifically by acceptable character regex.
+    function! GetStartOfWord(line, col, acceptableRegex)
+        let startPos = a:col
+        while (startPos > 0 && match(GetCharacterInPosition(a:line, startPos), a:acceptableRegex) != -1)
+            let startPos -= 1
+        endwhile
+        return startPos + 1
+    endfunction
+
+" Get position of end of a word in the document.
+" Here, "word" is defined specifically by acceptable character regex.
+    function! GetEndOfWord(line, col, acceptableRegex)
+        let endPos = a:col
+        while (match(GetCharacterInPosition(a:line, endPos), a:acceptableRegex) != -1)
+            let endPos += 1
+        endwhile
+        return endPos - 1
+    endfunction
+
+" Replace substring based on position, rather than regex.
+    function! SubstringReplace(exp, sub, startpos, length)
+        return a:exp[0:a:startpos-1].a:sub.a:exp[a:startpos + a:length:]
+    endfunction
+
+" Test if value is a numeric integer (whether it has commas or not).
+" Does not detect comma misplacement, i.e., 12,34 will return true.
+    function! IsInt(inputStr)
+        if (strlen(a:inputStr) == 0)
+            return 0
+        endif
+        let $testRegex = '\(\(\d\|,\|\s\)\@!.\)'
+        " Above regex finds anything that's neither a number nor a comma.
+        return (match(a:inputStr, $testRegex) == -1)
+    endfunction
+
+" Add or remove commas from number under cursor.
+" Displays error message if a number is not under the cursor.
+function! AddOrRemoveCommasFromNumberUnderCursor()
+    let posArr = getpos('.')
+    let $testWord = GetWordInPosition(posArr[1],posArr[2],'\d\|,')
+    if (!IsInt($testWord))
+        echo "Word under cursor is not a number."
+    else
+        call AddOrRemoveCommasFromNumberUnderCursorIntermediate()
+    endif
+endfunction
+
+command! Commas call AddOrRemoveCommasFromNumberUnderCursor()
+
+" Add or remove commas from number under cursor.
+" Intermediate function, which does not check for invalid cursor position.
+function! AddOrRemoveCommasFromNumberUnderCursorIntermediate()
+    let posArr = getpos('.')
+    let $regex = '\d\|,'
+    let $numberStr = GetWordInPosition(posArr[1],posArr[2],$regex)
+    if (match($numberStr, ',') == -1)
+        let $newNumber = AddCommasToNumber($numberStr)
+    else
+        let $newNumber = RemoveCommasFromNumber($numberStr)
+    endif
+    let startPos = GetStartOfWord(posArr[1], posArr[2], $regex)
+    let endPos = GetEndOfWord(posArr[1], posArr[2], $regex)
+    let $newline = SubstringReplace(getline(posArr[1]), $newNumber, startPos - 1 , endPos - startPos + 1)
+    call setline(posArr[1],$newline)
+endfunction
+
+" Add commas to number.  (Note that the input will need to be passed as a
+" string, because Vim has a very small resolution for integers.)
+function! AddCommasToNumber(inputNum)
+    let numStr = a:inputNum
+    let length = strlen(numStr)
+    let firstCommaDone = 0
+    let i = length - 2
+    let outputNum = numStr
+    while (i>0)
+        if ((length - i) % 3 == 0)
+            let outputNum = outputNum[0:i-1].','.outputNum[i:]
+        endif
+        let i -= 1
+    endwhile
+    return outputNum
+endfunction
+
+" Remove commas from number.
+function! RemoveCommasFromNumber(inputNum)
+    return substitute(a:inputNum,',','','g')
+endfunction
+

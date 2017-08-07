@@ -65,7 +65,6 @@
             "Append nothing. Workaround to prevent cursor's column position from changing back when change lines
         endfunction
         command! -nargs=1 MoveToNextTabStopCmd call MoveToNextTabStop(<args>)
-        map <Tab> :<C-U>MoveToNextTabStopCmd(v:count)<CR>
 
         function! MoveToPreviousTabStop(count)
             let save_pos = getpos('.')
@@ -89,7 +88,6 @@
             "Append nothing. Workaround to prevent cursor's column position from changing back when change lines
         endfunction
         command! -nargs=1 MoveToPreviousTabStopCmd call MoveToPreviousTabStop(<args>)
-        map <S-Tab> :<C-U>MoveToPreviousTabStopCmd(v:count)<CR>
 
     " Check if a script is already loaded and source iff not already loaded.
     " DO NOT ESCAPE SPACES IN FILENAMES!

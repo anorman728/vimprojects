@@ -58,11 +58,7 @@ behave xterm
         set showbreak=\ \ 
         "set showbreak=>>
 
-    " When textwidth is nonzero, don't add line breaks-- Prefer to do that with
-    "   Rewrap.
-    " set formatoptions=t to change this back to automatically break lines while
-    " writing.
-    " Also, don't add stupid things to the lines like asterisks.  Prefer to do
+    " Don't add stupid things to the lines like asterisks.  Prefer to do
     "   that manually.
         set formatoptions=
         
@@ -195,7 +191,6 @@ behave xterm
             endfunction
 
             command! ResourceVimrc call ResourceVimrcFunc()
-            map <F5> :ResourceVimrc<CR>
         endif
 " Other scripts to load.  (Must be in same directory as this file.)
 
@@ -230,6 +225,12 @@ behave xterm
 
     let $PasswordManager = $currentDir."/PasswordManager.vim"
     source $PasswordManager
+
+    let $textManipulation = $currentDir."/TextManipulation.vim"
+    source $textManipulation
+
+    let $Mappings = $currentDir."/Mappings.vim"
+    source $Mappings
 
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.

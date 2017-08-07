@@ -57,7 +57,6 @@ function! LineupFunc() range
 endfunction
 
 command! -range Lineup <line1>,<line2>call LineupFunc()
-map <F4> :Lineup<CR>
 
 " Default lineup character:
     call SetLineupCharacter('=')
