@@ -173,7 +173,9 @@
         
         function! TABFFunction()
             let $dirPath = expand('%:p')
+            let pos = getpos('.')
             tabe $dirPath
+            call setpos('.', pos)
         endfunction
 
         command! TABF call TABFFunction()
