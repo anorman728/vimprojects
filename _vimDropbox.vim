@@ -30,6 +30,10 @@ behave xterm
 "     g/<regex>/delete to delete all lines that contain match for <regex>
 "   If messed up decrypt key, can retry with two commands: set key=;edit (need to be on separate lines)
 "   Reload all files in buffer with "buffdo e".
+"   Netrw functions:
+"       Most Netrw functions are listed on screen.  Some aren't.
+"       d = create new directory.
+"       % = create new file.
  
 
 " Settings
