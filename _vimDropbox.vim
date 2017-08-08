@@ -236,6 +236,9 @@ behave xterm
     let $Mappings = $currentDir."/Mappings.vim"
     source $Mappings
 
+    let $FileList = $currentDir."/FileList.vim"
+    source $FileList
+
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
     let $sandBox = $backupdir."/sandbox.vim"
