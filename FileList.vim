@@ -1,9 +1,10 @@
 " Put files into a list that can be accessed by the user.
 
 " fileList is the global file list.
-if exists("fileList")
-    " Todo: Check if this is already sourced, because this is a pointless error if it's already being resourced.
-    echom "Warning! Global array fileList already exists! fileList plugin will not work as expected!"
+if !exists("fileList")
+    " Todo: Do something to warn user if fileList is not an array.
+    " Initialize the list.
+    call ClearListFunction()
 endif
 
 function! AddToListFunction()
@@ -51,7 +52,5 @@ endfunction
 command! GFF call GotoFileForceFunction()
 
 " Todo: Import files from existing list.
-" Todo: Eright (open to the right).
+" Todo: ERIGHT (open to the right).
 
-" This is to intitialize the list.
-call ClearListFunction()
