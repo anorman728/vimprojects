@@ -136,7 +136,8 @@ endif
 
 " Replace substring based on position, rather than regex.
     function! SubstringReplace(exp, sub, startpos, length)
-        return a:exp[0:a:startpos-1].a:sub.a:exp[a:startpos + a:length:]
+        let startpos = a:startpos
+        return strpart(a:exp, 0, startpos).a:sub.strpart(a:exp, startpos + a:length)
     endfunction
 
 " Test if value is a numeric integer (whether it has commas or not).
