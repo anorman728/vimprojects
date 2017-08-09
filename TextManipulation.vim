@@ -106,12 +106,12 @@ endif
         " Get position of end of word.
         let endposition = GetEndOfWord(a:line, a:col, a:acceptableCharacterReg)
 
-        return getline(a:line)[startposition - 1:endposition - 1]
+        return strpart(getline(a:line), startposition - 1, endposition - startposition + 1)
     endfunction
 
 " Get the character in the specified line and column.
     function! GetCharacterInPosition(line, col)
-        return getline(a:line)[a:col-1:a:col-1]
+        return strpart(getline(a:line),a:col-1,1)
     endfunction
 
 " Get position of start of a word in the document.
@@ -192,7 +192,7 @@ function! AddCommasToNumber(inputNum)
     let outputNum = numStr
     while (i>0)
         if ((length - i) % 3 == 0)
-            let outputNum = outputNum[0:i-1].','.outputNum[i:]
+            let outputNum = strpart(outputNum,0,i).','.strpart(outputNum,i)
         endif
         let i -= 1
     endwhile
