@@ -38,9 +38,9 @@ behave xterm
 
 " Settings
 
-    " set $VIMDROPBOX to this file.
+    " set $CUSTOMRC to this file.
 
-        let $VIMDROPBOX = expand("<sfile>")
+        let $CUSTOMRC = expand("<sfile>")
 
     " Set font.
         if has("unix")
