@@ -209,12 +209,6 @@ behave xterm
     let $docblockTools = $currentDir."/DocblockTools.vim"
     source $docblockTools
 
-    let $fileext = expand('%:e')
-    if $fileext=='js'
-        let $jsdoc = $currentDir."/JSdoc.vim"
-        source $jsdoc
-    endif
-
     let $deobfuscate = $currentDir."/Deobfuscate.vim"
     source $deobfuscate
 
@@ -242,3 +236,11 @@ behave xterm
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
     let $sandBox = $backupdir."/sandbox.vim"
+
+" Plugins not to be loaded every time vim loads.
+
+    " Custom JSDoc
+    let $jsdoc = $currentDir."/JSdoc.vim"
+
+    " PHP Code Generators.
+    let $phpCodeGenerators = $currentDir."/_phpCodeGenerators.vim"
