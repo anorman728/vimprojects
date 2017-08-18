@@ -151,56 +151,66 @@ endif
         return (match(a:inputStr, $testRegex) == -1)
     endfunction
 
-" Add or remove commas from number under cursor.
-" Displays error message if a number is not under the cursor.
-function! AddOrRemoveCommasFromNumberUnderCursor()
-    let posArr = getpos('.')
-    let $testWord = GetWordInPosition(posArr[1],posArr[2],'\d\|,')
-    if (!IsInt($testWord))
-        echo "Word under cursor is not a number."
-    else
-        call AddOrRemoveCommasFromNumberUnderCursorIntermediate()
-    endif
-endfunction
+" Insert line above the specified line number.
+" IF CREATES
+    function! InsertLine(linenum, linestr)
+        call setpos('.', [0, a:linenum, 0, 0])
+        exec "normal O"
+        call setline(a:linenum, a:linestr)
+        call setpos('.', [0, a:linenum+1, 0, 0])
+    endfunction
 
-command! Commas call AddOrRemoveCommasFromNumberUnderCursor()
-
-" Add or remove commas from number under cursor.
-" Intermediate function, which does not check for invalid cursor position.
-function! AddOrRemoveCommasFromNumberUnderCursorIntermediate()
-    let posArr = getpos('.')
-    let $regex = '\d\|,'
-    let $numberStr = GetWordInPosition(posArr[1],posArr[2],$regex)
-    if (match($numberStr, ',') == -1)
-        let $newNumber = AddCommasToNumber($numberStr)
-    else
-        let $newNumber = RemoveCommasFromNumber($numberStr)
-    endif
-    let startPos = GetStartOfWord(posArr[1], posArr[2], $regex)
-    let endPos = GetEndOfWord(posArr[1], posArr[2], $regex)
-    let $newline = SubstringReplace(getline(posArr[1]), $newNumber, startPos - 1 , endPos - startPos + 1)
-    call setline(posArr[1],$newline)
-endfunction
-
-" Add commas to number.  (Note that the input will need to be passed as a
-" string, because Vim has a very small resolution for integers.)
-function! AddCommasToNumber(inputNum)
-    let numStr = a:inputNum
-    let length = strlen(numStr)
-    let firstCommaDone = 0
-    let i = length - 2
-    let outputNum = numStr
-    while (i>0)
-        if ((length - i) % 3 == 0)
-            let outputNum = strpart(outputNum,0,i).','.strpart(outputNum,i)
+" Dealing with numbers
+    " Add or remove commas from number under cursor.
+    " Displays error message if a number is not under the cursor.
+    function! AddOrRemoveCommasFromNumberUnderCursor()
+        let posArr = getpos('.')
+        let $testWord = GetWordInPosition(posArr[1],posArr[2],'\d\|,')
+        if (!IsInt($testWord))
+            echo "Word under cursor is not a number."
+        else
+            call AddOrRemoveCommasFromNumberUnderCursorIntermediate()
         endif
-        let i -= 1
-    endwhile
-    return outputNum
-endfunction
+    endfunction
 
-" Remove commas from number.
-function! RemoveCommasFromNumber(inputNum)
-    return substitute(a:inputNum,',','','g')
-endfunction
+    command! Commas call AddOrRemoveCommasFromNumberUnderCursor()
+
+    " Add or remove commas from number under cursor.
+    " Intermediate function, which does not check for invalid cursor position.
+    function! AddOrRemoveCommasFromNumberUnderCursorIntermediate()
+        let posArr = getpos('.')
+        let $regex = '\d\|,'
+        let $numberStr = GetWordInPosition(posArr[1],posArr[2],$regex)
+        if (match($numberStr, ',') == -1)
+            let $newNumber = AddCommasToNumber($numberStr)
+        else
+            let $newNumber = RemoveCommasFromNumber($numberStr)
+        endif
+        let startPos = GetStartOfWord(posArr[1], posArr[2], $regex)
+        let endPos = GetEndOfWord(posArr[1], posArr[2], $regex)
+        let $newline = SubstringReplace(getline(posArr[1]), $newNumber, startPos - 1 , endPos - startPos + 1)
+        call setline(posArr[1],$newline)
+    endfunction
+
+    " Add commas to number.  (Note that the input will need to be passed as a
+    " string, because Vim has a very small resolution for integers.)
+    function! AddCommasToNumber(inputNum)
+        let numStr = a:inputNum
+        let length = strlen(numStr)
+        let firstCommaDone = 0
+        let i = length - 2
+        let outputNum = numStr
+        while (i>0)
+            if ((length - i) % 3 == 0)
+                let outputNum = strpart(outputNum,0,i).','.strpart(outputNum,i)
+            endif
+            let i -= 1
+        endwhile
+        return outputNum
+    endfunction
+
+    " Remove commas from number.
+    function! RemoveCommasFromNumber(inputNum)
+        return substitute(a:inputNum,',','','g')
+    endfunction
 
