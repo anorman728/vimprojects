@@ -54,7 +54,7 @@
         call InsertLine(Increment(), ' * @access  Public')
         call InsertLine(Increment(), ' * @param   '.a:type.' $input')
         call InsertLine(Increment(), ' */')
-        call InsertLine(Increment(), 'public function set'.propercase.'($input)')
+        call InsertLine(Increment(), 'public function set'.propercase.'('.a:type.' $input)')
         call InsertLine(Increment(), '{')
         call InsertLine(Increment(), '    $this->'.a:variable.' = $input;')
         call InsertLine(Increment(), '}')
