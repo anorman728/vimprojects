@@ -180,3 +180,13 @@
 
         command! TABF call TABFFunction()
 
+    " Return working file (just easier to use)                                  
+                                                                               
+        function! ThisFile()                                                    
+            let $thisfile = expand('%:p')                                       
+            return $thisfile                                                    
+        endfunction                                                             
+                                                                                
+        function! TF()                                                          
+            return ThisFile()                                                   
+        endfunction     
