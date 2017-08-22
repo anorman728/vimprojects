@@ -34,13 +34,15 @@ endfunction
 
 command! RMFROMLIST call RmFromListFunction()
 
-function! GotoFileForceFunction()
-    " Note that this doesn't have exactly the same behavior as gf: Only goes by
-    " line, not looking for filename.  Not interested in taking the time to change
-    " that.
-    let $fileName = getline(getpos('.')[1])
-    e! $fileName
-endfunction
+if !exists("*GotoFileForceFunction")
+    function! GotoFileForceFunction()
+        " Note that this doesn't have exactly the same behavior as gf: Only goes by
+        " line, not looking for filename.  Not interested in taking the time to change
+        " that.
+        let $fileName = getline(getpos('.')[1])
+        e! $fileName
+    endfunction
+endif
 
 command! GFF call GotoFileForceFunction()
 
@@ -54,3 +56,15 @@ if !exists("fileList")
     call ClearListFunction()
 endif
 
+" Q&D function to open file to the right.  Will need to refactor to make
+" compatible with Netrw on all systems.
+    
+if !exists("*OpenRightFunction")
+    function OpenRightFunction()
+        vsp
+        exec "normal \<C-w>l"
+        call GotoFileForceFunction()
+    endfunction
+endif
+
+command! OR call OpenRightFunction()
