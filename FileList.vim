@@ -68,3 +68,15 @@ if !exists("*OpenRightFunction")
 endif
 
 command! OR call OpenRightFunction()
+
+" Q&D function to open file below.
+
+if !exists("*OpenBelowFunction")
+    function OpenBelowFunction()
+        sp
+        exec "normal \<C-w>j"
+        call GotoFileForceFunction()
+    endfunction
+endif
+
+command! OB call OpenBelowFunction()
