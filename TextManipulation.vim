@@ -52,23 +52,13 @@ endif
     endfunction
 
 " Append the "message" to the end of the "file".
-    function! AppendToFile(file,message)
-
-        if filereadable(a:file)
-            let $writeCommand = 'w! >>'
-        else
-            let $writeCommand = 'w! '
+    function! AppendToFile(file, message)
+        if !has('Unix')
+            echo "Warning:  This may not be compatible with non-Unix-like systems."
         endif
         let $filePath = fnameescape(a:file)
-        let $tabNum=tabpagenr()
-        tabe
-            normal gg0
-            setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
-            silent! put=a:message
-            " Don't use Insert because it doesn't really work correctly here.
-            silent! exec $writeCommand.$filePath
-        tabclose!
-        exec "normal ".$tabNum."gt"
+        let $cmd = '! echo "'.a:message.'" >> '.a:file
+        silent exec $cmd
     endfunction
 
 " Inject a string into another string.  
