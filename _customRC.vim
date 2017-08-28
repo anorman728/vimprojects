@@ -74,15 +74,17 @@ behave xterm
      
     " Put swap file, etc. into temporary directory instead of the current
     " directory.
-        if has("unix")
-            if exists('isAndroid') && isAndroid==1
-                let $backupdir="/storage/emulated/0/vimtmp" " Android
-            else
-                let $backupdir="/tmp" " Linux
-            endif
-        else
-            let $backupdir="C:\\Temp" " Windows
-        endif
+        "if has("unix")
+        "    if exists('isAndroid') && isAndroid==1
+        "        let $backupdir="/storage/emulated/0/vimtmp" " Android
+        "    else
+        "        let $backupdir="/tmp" " Linux
+        "    endif
+        "else
+        "    let $backupdir="C:\\Temp" " Windows
+        "endif
+
+        let $backupdir = $HOME.'/backupdir'
 
         if isdirectory($backupdir)
             set backup backupdir=$backupdir dir=$backupdir
