@@ -1,38 +1,33 @@
 " Put files into a list that can be accessed by the user.
 
+" Source the TextManipulation plugin.
+    let $currentDir=expand("<sfile>:p:h")
+    let $textManipulation = $currentDir."/TextManipulation.vim"
+    "source $textManipulation
+    call SourceIfNotSourced($textManipulation)
+
+function! SetListFile(listFile)
+    let g:fileList = a:listFile
+endfunction
+
+call SetListFile($HOME . '/fileList')
+
+function! GetListFile()
+    return g:fileList
+endfunction
+
 function! AddToListFunction()
     let $fileName = expand('%:p')
-    call add(g:fileList, $fileName)
+    call AppendToFile(GetListFile(), $fileName)
 endfunction
 
 command! ADDTOLIST call AddToListFunction()
 
 function! ViewListFunction()
-    enew
-    call setline(1,g:fileList)
-    sav! /tmp/filelist
+    exec "e ".GetListFile()
 endfunction
 
 command! VIEWLIST call ViewListFunction()
-
-function! ClearListFunction()
-    let g:fileList = []
-endfunction
-
-command! CLEARLIST call ClearListFunction()
-
-function! RmFromListFunction()
-    let dumArr = []
-    let $deletedFile = expand('%:p')
-    for $fileName in g:fileList
-        if ($fileName != $deletedFile)
-            call add(dumArr,$fileName)
-        endif
-    endfor
-    let g:fileList = dumArr
-endfunction
-
-command! RMFROMLIST call RmFromListFunction()
 
 if !exists("*GotoFileForceFunction")
     function! GotoFileForceFunction()
@@ -45,16 +40,6 @@ if !exists("*GotoFileForceFunction")
 endif
 
 command! GFF call GotoFileForceFunction()
-
-" Todo: Import files from existing list.
-" Todo: ERIGHT (open to the right).
-
-" fileList is the global file list.
-if !exists("fileList")
-    " Todo: Do something to warn user if fileList is not an array.
-    " Initialize the list.
-    call ClearListFunction()
-endif
 
 " Q&D function to open file to the right.  Will need to refactor to make
 " compatible with Netrw on all systems.
