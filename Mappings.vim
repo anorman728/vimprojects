@@ -8,3 +8,6 @@ map <silent><F3> :DocBlockIndent<CR>
 map <silent><F4> :Lineup<CR>
 map <silent><F5> :ResourceVimrc<CR>
 map <silent><F6> :Commas<CR>
+
+" Because I keep hitting this by mistake and never actually use it.
+inoremap <C-p> <Esc>
