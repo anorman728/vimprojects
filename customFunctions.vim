@@ -202,8 +202,3 @@
         silent exec '! echo "'.a:input.'" > ~/clipboard'
     endfunction
 
-" Remove spaces at the ends of lines
-
-    function! RemoveSpaces()
-        %s/\(\s\|\s\+\)$//
-    endfunction
