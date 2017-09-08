@@ -34,6 +34,7 @@ behave xterm
 "       Most Netrw functions are listed on screen.  Some aren't.
 "       d = create new directory.
 "       % = create new file.
+"   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
  
 
 " Settings
@@ -246,3 +247,6 @@ behave xterm
 
     " PHP Code Generators.
     let $phpCodeGenerators = $currentDir."/_phpCodeGenerators.vim"
+
+    " Debugging tools
+    let $debugTools = $currentDir."/Debug.vim"
