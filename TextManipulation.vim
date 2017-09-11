@@ -53,12 +53,18 @@ endif
 
 " Append the "message" to the end of the "file".
     function! AppendToFile(file, message)
+        " Note: Don't debug this with the Debug function.  Causes infinite loop.
         if !has('Unix')
-            echo "Warning:  This may not be compatible with non-Unix-like systems."
+            echo "Warning:  This will not be compatible with non-Unix-like systems."
         endif
-        let $filePath = fnameescape(a:file)
-        let message = substitute(a:message, '[[:cntrl:]]', '', 'g')
+        if FileExists(a:file)
+            let $msgstart = '\n'
+        else
+            let $msgstart = ''
+        endif
+        let message = $msgstart.substitute(a:message, '[[:cntrl:]]', '', 'g')
         let $cmd = '! printf "'.message.'" >> '.a:file
+        echom $cmd
         silent exec $cmd
     endfunction
 
@@ -229,3 +235,15 @@ function! RemoveSpaces()
     %s/\(\s\|\s\+\)$//
 endfunction
 
+
+" Determine if a file exists or not.
+
+function! FileExists(filePath)
+    if !has('Unix')
+        echo "Warning:  This will not be compatible with non-Unix-like systems."
+    endif
+    let $filePath = fnameescape(a:filePath)
+    let $testCmd = 'if [[ -s '.a:filePath.' ]]; then echo "1"; else echo "0"; fi;'
+    let returnVal = substitute(system($testCmd), '[[:cntrl:]]', '', 'g')
+    return returnVal
+endfunction
