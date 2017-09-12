@@ -18,7 +18,7 @@ endfunction
 
 function! AddToListFunction()
     let $fileName = expand('%:p')
-    call AppendToFile(GetListFile(), fnameescape($fileName))
+    call AppendToFile(GetListFile(), $fileName)
 endfunction
 
 command! ADDTOLIST call AddToListFunction()
