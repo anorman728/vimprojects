@@ -53,19 +53,15 @@ endif
 
 " Append the "message" to the end of the "file".
     function! AppendToFile(file, message)
-        " Note: Don't debug this with the Debug function.  Causes infinite loop.
+        " Note: Don't debug this with the Debug function.  Causes infinite recursion.
         if !has('Unix')
             echo "Warning:  This will not be compatible with non-Unix-like systems."
         endif
-        if FileExists(a:file)
-            let $msgstart = '\n'
-        else
-            let $msgstart = ''
-        endif
-        let message = $msgstart.substitute(a:message, '[[:cntrl:]]', '', 'g')
-        let $cmd = '! printf "'.message.'" >> '.a:file
-        echom $cmd
-        silent exec $cmd
+        let lineArr = split(a:message, '\n')
+        for msg in lineArr
+            let $cmd = '! echo "'.msg.'" >> '.a:file
+            silent exec $cmd
+        endfor
     endfunction
 
 " Inject a string into another string.  
