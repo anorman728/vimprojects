@@ -234,7 +234,8 @@ behave xterm
     source $Mappings
 
     let $FileList = $currentDir."/FileList.vim"
-    source $FileList
+    call SourceIfNotSourced($FileList)
+    " Don't resource this if already sourced, because causes problems if vimrc is reloaded on each file.
 
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
