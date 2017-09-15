@@ -3,7 +3,6 @@
 " Source the TextManipulation plugin.
     let $currentDir=expand("<sfile>:p:h")
     let $textManipulation = $currentDir."/TextManipulation.vim"
-    "source $textManipulation
     call SourceIfNotSourced($textManipulation)
 
 function! SetListFile(listFile)
