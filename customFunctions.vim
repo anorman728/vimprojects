@@ -56,7 +56,6 @@
             let keynum = 0
         endif
         let newColumn = currentColumn + slack + keynum*4
-        echom currentColumn
 
         let new_pos = [0,line_num,newColumn,0]
 
