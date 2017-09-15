@@ -35,6 +35,7 @@ behave xterm
 "       d = create new directory.
 "       % = create new file.
 "   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
+"   Default settings are usually in /usr/share/vim/vim74/ (or another number for a different version)
  
 
 " Settings
