@@ -47,7 +47,7 @@ endfunction
 " Create a new password, based on title and username.
 function! CreatePassword(title,user)
     if (!VerifyFile())
-        echo "This is not a password file."
+        throw "This is not a password file."
     else
         call setpos('.',[0,line('$'),0,0])
         let $pass = GeneratePassword(g:passwordStrength)
@@ -62,7 +62,7 @@ endfunction
 " Get existing password.  Echo username and copy password to clipboard.
 function! GetPassword(title)
     if (!VerifyFile())
-        echo "This is not a password file."
+         throw "This is not a password file."
     else
         call setpos('.',[0,0,0,0])
         exec "/^".a:title."$"
