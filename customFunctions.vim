@@ -15,7 +15,7 @@
 
 " Custom Columns functions
 
-     " Function to enable columns demarking tabs.
+    " Function to enable columns demarking tabs.
         function! TabColumns()
             set colorcolumn=1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,80,81,85,89,93,97,101,105,109,113,117,120,121
         endfunction
@@ -114,10 +114,25 @@
         redir => returnStr
             silent execute a:command
         redir END
+
         " Remove "Control" characters, i.e., ^@.
         let returnStr = substitute(returnStr,'[[:cntrl:]]','','g')
+
         " Trim.
-        let returnStr = substitute(returnStr,'^\(\s\|\s\+\)','','g')
+        let $space = '\(\s\|\s\+\)'
+        let returnStr = Trim(returnStr, $space)
+
+        return returnStr
+    endfunction
+
+" Trim
+
+    function! Trim(inputStr, trimVal)
+        let returnStr = a:inputStr
+        let regex = '\(^'.a:trimVal.'\|'.a:trimVal.'$\)'
+        while match(returnStr, regex) != -1
+            let returnStr = substitute(returnStr, '\(^'.a:trimVal.'\|'.a:trimVal.'$\)', '', 'g')
+        endwhile
         return returnStr
     endfunction
 
@@ -201,3 +216,15 @@
         silent exec '! echo "'.a:input.'" > ~/clipboard'
     endfunction
 
+" Toggle autoindent.
+
+    function! ToggleAutoindent()
+        "call Debug('set autoindent', GetOutput("set autoindent?"))
+        if GetOutput("set autoindent?") == "autoindent"
+            set noautoindent
+        else
+            set autoindent
+        endif
+    endfunction
+
+    command! TI call ToggleAutoindent()
