@@ -201,6 +201,10 @@ behave xterm
 
             command! ResourceVimrc call ResourceVimrcFunc()
         endif
+
+    " Use @j to join without spaces.
+        let @j = "Jx"
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
