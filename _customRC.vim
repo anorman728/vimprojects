@@ -247,6 +247,9 @@ behave xterm
     " already exists, as long as the location is writeable.
     let $sandBox = $backupdir."/sandbox.vim"
 
+    " Use line numbers in Netrw
+    let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
 " Plugins not to be loaded every time vim loads.
 
     " Custom JSDoc
