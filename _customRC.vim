@@ -250,6 +250,9 @@ behave xterm
     " Use line numbers in Netrw
     let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
+    " Always show tabline.
+    set showtabline=2
+
 " Plugins not to be loaded every time vim loads.
 
     " Custom JSDoc
