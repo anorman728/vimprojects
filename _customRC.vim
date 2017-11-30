@@ -248,7 +248,7 @@ behave xterm
     let $sandBox = $backupdir."/sandbox.vim"
 
     " Use line numbers in Netrw
-    let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+    let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'
 
     " Always show tabline.
     set showtabline=2
