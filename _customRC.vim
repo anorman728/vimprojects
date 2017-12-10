@@ -1,9 +1,9 @@
 set nocompatible
 behave xterm
 " Updated: 04/30/2017
- 
+
 " Notes:
- 
+
 "   Fix "Not an editor command: ^M" message with :w ++ff=unix
 "   Logging messages.
 "       Can log messages with "echom" instead of "echo."  If use "echom", then
@@ -37,7 +37,7 @@ behave xterm
 "   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
 "   Default settings are usually in /usr/share/vim/vim74/ (or another number for a different version)
 "   Note on folding:  If your fold method is expr and you switch to manual, the foldlevel of each line that was set by expr is not changed.  That means you can change to manual fold level without losing any existing folds (whether opened or closed) and create new folds.  (This is really useful when need to fold something with bad indentation.)
- 
+
 
 " Settings
 
@@ -51,15 +51,15 @@ behave xterm
         else
             set guifont=Consolas:h12 " Windows
         endif
-        
+
     " Set color scheme
         colorscheme koehler
         " Changing the background color of folded lines is done in the "syntax
         " on" segment.
-        
+
     " Show line numbers
         set number
-        
+
     " Shown on breaks if wordwrap is on.
         set breakindent
         set showbreak=\ \ 
@@ -68,13 +68,13 @@ behave xterm
     " Don't add stupid things to the lines like asterisks.  Prefer to do
     "   that manually.
         set formatoptions=
-        
+
     " Don't break lines in the middle of words in wordwrap.
         set lbr
-     
+
     " Use spaces instead of tabs.
         set tabstop=4 shiftwidth=4 expandtab
-     
+
     " Put swap file, etc. into temporary directory instead of the current
     " directory.
         "if has("unix")
@@ -99,7 +99,7 @@ behave xterm
     " Disable temporary files (if they cause more problems than they solve).
         "set nobackup
         "set noswapfile
-        
+
     " Sometimes Vim doesn't automatically use color-coding.  This forces it.
     " (Also make sure to use opening tags in php.)
         syntax on
@@ -114,7 +114,7 @@ behave xterm
     " Darken text of folded lines so they don't get in the way.
         hi Folded guifg=#353535
         hi Folded ctermfg=Black
-        
+
     " Misc color settings for terminal.
         " Remove weird colors for errors.
         hi Error ctermbg=8
@@ -129,11 +129,11 @@ behave xterm
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
         "autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-     
+
     " Automatically indent new line based on the current line's indentation.
         set indentexpr= "Autoindent alone doesn't do it for some reason.
         set autoindent
-        
+
     " Set backspace behavior.
         " :set backspace=indent,eol,start " The way backspace works in most
         "   programs-- Can backspace over autoindent, line breaks, where cursor was
@@ -164,11 +164,11 @@ behave xterm
         set nowrap
 
     " Relative number
-        
+
         set relativenumber
 
     " Textwidth
-        
+
         set textwidth=80
 
     " Don't write netrwhist file.
@@ -193,7 +193,7 @@ behave xterm
         set nohls
 
     " Use F5 to resource vimrc.
-        
+
         if !exists("*ResourceVimrcFunc")
             function ResourceVimrcFunc()
                 source $HOME/.vimrc
@@ -204,6 +204,10 @@ behave xterm
 
     " Use @j to join without spaces.
         let @j = "Jx"
+
+    " Highlight unwanted whitespace.  (May want to refactor into a toggle function later-- ATM, not needed.)
+    syn match unwantedWhitespace /\(\s\|\s\+\)$/
+    hi unwantedWhitespace ctermbg = 1
 
 " Other scripts to load.  (Must be in same directory as this file.)
 
