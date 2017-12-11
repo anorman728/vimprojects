@@ -205,10 +205,6 @@ behave xterm
     " Use @j to join without spaces.
         let @j = "Jx"
 
-    " Highlight unwanted whitespace.  (May want to refactor into a toggle function later-- ATM, not needed.)
-    syn match unwantedWhitespace /\(\s\|\s\+\)$/
-    hi unwantedWhitespace ctermbg = 1
-
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
