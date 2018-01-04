@@ -205,6 +205,22 @@
         return ThisFile()
     endfunction
 
+" Set working file to g:filedrawer
+
+    function! SetFileDrawer()
+        let g:filedrawer = TF()
+    endfunction
+
+    command! SFD call SetFileDrawer()
+
+" Open file drawer.
+    function! OpenFileDrawer()
+        let $a=g:filedrawer
+        e $a
+    endfunction
+
+    command! OFD call OpenFileDrawer()
+
 " Q&D clipboard functions.
 
     function! Paste()
