@@ -202,10 +202,6 @@ behave xterm
             command! ResourceVimrc call ResourceVimrcFunc()
         endif
 
-    " Use @l to replace space after cursor with underscore and capitalize
-    " current word.
-        let @l = "/\\ \nr_gUaw"
-
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
