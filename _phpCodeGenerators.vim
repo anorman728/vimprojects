@@ -51,6 +51,7 @@
         call InsertLine(Increment(), ' * Setter for ' . a:variable . '.')
         call InsertLine(Increment(), ' *')
         call InsertLine(Increment(), ' * @param   '.a:type.' $input')
+        call InsertLine(Increment(), ' * @return  void')
         call InsertLine(Increment(), ' */')
         call InsertLine(Increment(), 'public function set'.propercase.'('.a:type.' $input)')
         call InsertLine(Increment(), '{')
