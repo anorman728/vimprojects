@@ -1,6 +1,7 @@
 " Password management (because pass is garbage).
 " Use with an encrypted file for best security.
 " Password retrieval requires that xclip be installed.
+" In WSL, requires that $isWSL be equal to 1.
 " Not compatible with non-*nix systems.
 " call InitPasswordFile() to create file.
 " call CreatePassword(title,username) to add a password.
@@ -62,7 +63,7 @@ endfunction
 " Get existing password.  Echo username and copy password to clipboard.
 function! GetPassword(title)
     if (!VerifyFile())
-         throw "This is not a password file."
+        throw "This is not a password file."
     else
         call setpos('.',[0,0,0,0])
         exec "/^".a:title."$"
@@ -78,9 +79,15 @@ endfunction
 function! GetPasswordIntermediate(lineNum)
     echo getline(a:lineNum+1)
     let $password = substitute(getline(a:lineNum+2),'^.\{-}:','','')
-    let $cmdDum = "echo '".$password."' | xclip -selection c"
-    call system($cmdDum)
-    call system('sleep 60 && echo "" | xclip -selection c &')
+    if ($isWSL)
+        let $cmdDum = "echo $'".$password."\n' | /mnt/c/Windows/System32/clip.exe"
+        call system($cmdDum)
+        call system('sleep 60 && echo "" | /mnt/c/Windows/System32/clip.exe &')
+    else
+        let $cmdDum = "echo '".$password."' | xclip -selection c"
+        call system($cmdDum)
+        call system('sleep 60 && echo "" | xclip -selection c &')
+    endif
     call setpos('.',[0,0,0,0])
 endfunction
 
