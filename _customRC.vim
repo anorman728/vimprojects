@@ -112,19 +112,22 @@ behave xterm
         hi Folded ctermbg=8
 
     " Darken text of folded lines so they don't get in the way.
-        hi Folded guifg=#353535
-        hi Folded ctermfg=Black
+        "hi Folded guifg=#353535
+        "hi Folded ctermfg=Black
 
     " Misc color settings for terminal.
         " Remove weird colors for errors.
-        hi Error ctermbg=8
-        hi Error ctermfg=1
+        "hi Error ctermbg=8
+        "hi Error ctermfg=1
         " Correct wrong background for ignore.
-        hi Ignore ctermbg=8
+        "hi Ignore ctermbg=8
         " Change special color to orange.
-        hi Special ctermfg=3
+        "hi Special ctermfg=3
         " Make identifier blueish.
-        hi Identifier ctermfg=6
+        "hi Identifier ctermfg=6
+
+    " Testing new color scheme
+        hi Comment ctermfg=6
 
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
