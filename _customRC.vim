@@ -117,17 +117,13 @@ behave xterm
 
     " Misc color settings for terminal.
         " Remove weird colors for errors.
-        "hi Error ctermbg=8
-        "hi Error ctermfg=1
-        " Correct wrong background for ignore.
-        "hi Ignore ctermbg=8
+        hi Error ctermbg=8
+        hi Error ctermfg=1
         " Change special color to orange.
-        "hi Special ctermfg=3
-        " Make identifier blueish.
-        "hi Identifier ctermfg=6
+        hi Special ctermfg=3
 
     " Testing new color scheme
-        hi Comment ctermfg=6
+        "hi Comment ctermfg=6
 
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
