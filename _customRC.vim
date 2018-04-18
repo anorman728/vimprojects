@@ -108,11 +108,9 @@ behave xterm
     "   kind of annoying.)
     " Need to do this *here* rather than when setting color scheme because
     "   "syntax on" will change it back.
-        hi Folded guibg='Black'
-        hi Folded ctermbg=8
+        "hi Folded ctermbg=8
 
     " Darken text of folded lines so they don't get in the way.
-        "hi Folded guifg=#353535
         "hi Folded ctermfg=Black
 
     " Misc color settings for terminal.
@@ -122,8 +120,19 @@ behave xterm
         " Change special color to orange.
         hi Special ctermfg=3
 
-    " Testing new color scheme
-        "hi Comment ctermfg=6
+    " Change the way folded lines look.
+        " Yanked and modified from here-- https://stackoverflow.com/questions/33281187/how-to-change-the-way-that-vim-display-those-collapsed-folded-lines#33281531
+        function! MyFoldText()
+            let nblines = v:foldend - v:foldstart + 1
+            let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+            let line = getline(v:foldstart)
+            let leftMarginCount = match(line, '\s\@!') - 1
+            let leftMargin = repeat(" ", leftMarginCount)
+            let rightMargin = repeat(" ", w)
+            let txt = leftMargin . " +-- " . nblines . " lines hidden --+ " . rightMargin
+            return txt
+        endfunction
+        set foldtext=MyFoldText()
 
     " Disables automatic formatting, but I'm not certain that it's necessary in
     "   light of the autoindent section below.  Commented out for now.
