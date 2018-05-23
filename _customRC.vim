@@ -36,7 +36,11 @@ behave xterm
 "       % = create new file.
 "   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
 "   Default settings are usually in /usr/share/vim/vim74/ (or another number for a different version)
-"   Note on folding:  If your fold method is expr and you switch to manual, the foldlevel of each line that was set by expr is not changed.  That means you can change to manual fold level without losing any existing folds (whether opened or closed) and create new folds.  (This is really useful when need to fold something with bad indentation.)
+"   Note on folding:  If your fold method is expr and you switch to manual, the
+"   foldlevel of each line that was set by expr is not changed.  That means you
+"   can change to manual fold level without losing any existing folds (whether
+"   opened or closed) and create new folds.  (This is really useful when need to
+"   fold something with bad indentation.)
 
 
 " Settings
