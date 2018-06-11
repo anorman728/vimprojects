@@ -217,6 +217,14 @@ behave xterm
             command! ResourceVimrc call ResourceVimrcFunc()
         endif
 
+" Macros
+    " Use @l to replace space after cursor with underscore and capitalize
+    " current word.
+        let @l = "/\\ \nr_gUaw"
+
+    " Use @d to delete everything in a file.
+        let @d = "ggdG"
+
 " Other scripts to load.  (Must be in same directory as this file.)
 
     let $currentDir=expand("<sfile>:p:h")
