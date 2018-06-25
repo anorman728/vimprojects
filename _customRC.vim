@@ -37,6 +37,10 @@ behave xterm
 "   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
 "   Default settings are usually in /usr/share/vim/vim74/ (or another number for a different version)
 
+"   Use "=" to automatically set spacing according to current syntax.
+
+"   Use command TOhtml (can be used with highlighted code) to generate HTML text of code.
+
 "   Note on folding:  If your fold method is expr and you switch to manual, the
 "   foldlevel of each line that was set by expr is not changed.  That means you
 "   can change to manual fold level without losing any existing folds (whether
