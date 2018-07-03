@@ -59,7 +59,10 @@ endif
         endif
         let lineArr = split(a:message, '\n')
         for msg in lineArr
-            let $cmd = '! echo "'.msg.'" >> '.a:file
+            let $msgEsc = msg
+            let $msgEsc = substitute($msgEsc, '"', '\\"', 'g')
+            let $msgEsc = substitute($msgEsc, '!', '\\!', 'g')
+            let $cmd = '! echo "'.$msgEsc.'" >> '.a:file
             silent exec $cmd
         endfor
     endfunction
