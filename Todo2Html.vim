@@ -22,7 +22,7 @@ function! Htmlify(outputFile)
     let prevLn = 1
     while i<=lines
         let $lineDum = substitute(getline(i),'^\s\+','','g')
-        if match($lineDum,'^\(\s\+\)\?\(Example\|Ex\):\(\s\+\)\?$')!=-1
+        if match($lineDum,'^\(\s\+\)\?\(Example:\|Ex:\|@begin=.*@\)\(\s\+\)\?$')!=-1
             let exampleArray = GetExampleArray(i)
             let $html = exampleArray[0]
             call AppendToFile(a:outputFile,$html)
@@ -151,7 +151,7 @@ function! GetExampleArray(lineNum)
     let $returnStr = '<pre>'
     let currLineNum = a:lineNum+1
     let currLineStr = getline(currLineNum)
-    while match(currLineStr,'^\(\s\+\)\?endex')==-1
+    while match(currLineStr,'^\(\s\+\)\?\(endex\|@end=.*@\)')==-1
         let $returnStr .= $newline.currLineStr
         let currLineNum+=1
         let currLineStr = getline(currLineNum)
