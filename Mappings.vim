@@ -11,3 +11,7 @@ map <silent><F6> :Commas<CR>
 
 " Because I keep hitting this by mistake and never actually use it.
 inoremap <C-p> <Esc>
+
+" Remap scrolling hotkeys to keep cursor in same position.
+map <C-d> :call ScrollCustom(0)<CR>
+map <C-u> :call ScrollCustom(1)<CR>

@@ -244,3 +244,17 @@
     endfunction
 
     command! TI call ToggleAutoindent()
+
+" Scroll function.
+
+    " Custom scroll function, because I like to keep the cursor where it was.
+    " True = up, false = down
+    function! ScrollCustom(updown)
+        if a:updown
+            let updown = "\<c-y>"
+        else
+            let updown = "\<c-e>"
+        endif
+        let scrollAmt = winheight('%')/2
+        exe "normal " . scrollAmt . updown
+    endfunction
