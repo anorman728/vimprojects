@@ -258,3 +258,14 @@
         let scrollAmt = winheight('%')/2
         exe "normal " . scrollAmt . updown
     endfunction
+
+" Correct HTML indentation  (This screws up settings!  Only use it in a new window!)
+    
+    function! CorrectHtmlIndentation()
+        %s/</\r</g
+        filetype indent on
+        set filetype=html
+        set smartindent
+        normal gg=G
+        g/^$/d
+    endfunction
