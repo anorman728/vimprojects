@@ -221,6 +221,9 @@ behave xterm
             command! ResourceVimrc call ResourceVimrcFunc()
         endif
 
+    " Disable the backtick shortcuts.
+        nnoremap ` <nop>
+
 " Macros
     " Use @l to replace space after cursor with underscore and capitalize
     " current word.
