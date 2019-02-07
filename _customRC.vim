@@ -222,7 +222,10 @@ behave xterm
         endif
 
     " Disable the backtick shortcuts.
-        nnoremap ` <nop>
+        " nnoremap ` <nop>
+        " Disabling this because, although the backtick shortcuts are really
+        " frustrating for file shortcuts, they're really useful for bookmarks
+        " within a single file.
 
 " Macros
     " Use @l to replace space after cursor with underscore and capitalize
