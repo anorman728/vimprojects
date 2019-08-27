@@ -1,161 +1,93 @@
-" Plugin that converts the todo format to html, and includes a reference to
-" the MathJax script.
-" Using '~' for home directory in *NIX doesn't work at the moment.
+" Plugin that converts the todo format to html.
 
-" DO NOT ESCAPE SPACES IN FILE NAMES!
-
-" Source the TextManipulation plugin.
-    let $currentDir=expand("<sfile>:p:h")
-    let $textManipulation = $currentDir."/TextManipulation.vim"
-    "source $textManipulation
-    call SourceIfNotSourced($textManipulation)
+" As of 8/27/2019, uses TOhtml for much better results.
 
 function! Htmlify(outputFile)
-    
-    call InitializeFile(a:outputFile)
+    " Note: This is absolutely terrible code.  I find myself not caring.
 
-    let $html = HtmlHeader()
-    call AppendToFile(a:outputFile,$html)
+    " Later note:  My gosh, I sure care now.  Maybe this should have been a
+    " Python script.
+
+    " Final note:  If you think this final version is bad, you should have seen
+    " the version when I made the previous note.
+
+    set nonumber
+    set norelativenumber
+
+    TOhtml
 
     let lines = line('$')
     let i=1
-    let prevLn = 1
+    let $isOn = 0
+    let $lineopeningregexp = '^<span.\{-}>'
+
     while i<=lines
-        let $lineDum = substitute(getline(i),'^\s\+','','g')
-        if match($lineDum,'^\(\s\+\)\?\(Example:\|Ex:\|@begin=.*@\)\(\s\+\)\?$')!=-1
-            let exampleArray = GetExampleArray(i)
-            let $html = exampleArray[0]
-            call AppendToFile(a:outputFile,$html)
-            let i = exampleArray[1]
-        elseif match($lineDum,'^\(\s\+\)\?$')==-1
-            let $html=$newline
-            " Tags
-                let tags = Tags($lineDum)
-            " Add blockquotes
-                let $html .= AddBlockQuote(i,prevLn)
-            " HtmlEntities
-                let $lineDum = HtmlEntities($lineDum)
-            " Underlining
-                let $lineDum = AddUnderlineTags($lineDum)
-            let $html .= tags[0].$lineDum.tags[1]
-            call AppendToFile(a:outputFile,$html)
-            let prevLn = i
+        let $line = getline(i)
+        let $spanstuff = matchstr($line, $lineopeningregexp)
+
+        if match($line, '^<pre') != -1 || ($line == '</pre>')
+            call setline(i, '')
         endif
-        let i += 1
-        redraws
-        echon "Line ".i."/".lines
-    endwhile
 
-    let $html = $newline."</body>"
-    call AppendToFile(a:outputFile,$html)
+        if $isOn
+            if strlen($spanstuff) != 0
+                let $lineDum = substitute($line, $lineopeningregexp, '', '')
+            else
+                " In this case, there's no existing span, thus no span to filter
+                " out.
+                let $lineDum = $line
+            endif
 
-    call FinalizeFile(a:outputFile)
+            let $spaces = matchstr($lineDum, '^\s\+')
+            let $spacesCount = string(strlen($spaces) / 2 + 2.5)
 
-endfunction
+            " Remove extraneous space (not really necessary, but good for
+            " viewing source).
+            "let $line = substitute($line, '>\s\+', '>', '')
+            "let $line = substitute($line, '^\s\+', '', '')
+            " These cause more problems than they solve.  Just keep the extra
+            " spaces in the source.  No one's going to have any reason to look
+            " at it anyway.
 
-function! HtmlEntities(inputStr)
-    let $returnVal = a:inputStr
-    let $returnVal = substitute($returnVal,'&','\&amp;','g')
-    let $returnVal = substitute($returnVal,'<','\&lt;','g')
-    let $returnVal = substitute($returnVal,'>','\&gt;','g')
-    return $returnVal
-endfunction
+            " Put &nbsp; in if $line is empty.
+            if strlen($line) == 0
+                let $line = '&nbsp;'
+            endif
 
-function! HtmlHeader()
-    let $html  = $newline."<!DOCTYPE html>"
-    let $html .= $newline."<head>"
-    let $html .= $newline."<title>".expand('%:t')."</title>"
-    let $html .= $newline."<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>"
-    let $html .= $newline."</head>"
-    let $html .= $newline."<body>"
-    return $html
-endfunction
+            let $newline = '<div style="padding-left:' . $spacesCount . 'em;text-indent:-1.25em;">' . $line . '</div>'
+            call setline(i, $newline)
 
-function! Tags(inputStr)
-
-    if match(a:inputStr,'^>')!=-1
-        " Todo.
-        let $openTag = '<p style="color:green;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^+')!=-1
-        " Done.
-        let $openTag = '<p style="color:tan;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^\.\.\.')!=-1
-        " Wait.
-        let $openTag = '<p style="color:purple;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^\*')!=-1
-        " Information.
-        let $openTag = '<p style="color:blue;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^-')!=-1
-        " Canceled
-        let $openTag = '<p style="color:red;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^?')!=-1
-        " Question
-        let $openTag = '<p style="color:brown;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^!')!=-1
-        " Important
-        let $openTag = '<p style="color:brown;">'
-        let $closeTag = '</p>'
-    elseif match(a:inputStr,'^.*:$')!=-1
-        " Title.  (Intentionally doing this last.)
-        let $openTag = "<h4>"
-        let $closeTag = "</h4>"
-    else
-        " Everything else
-        let $openTag = '<p>'
-        let $closeTag = '</p>'
-    endif
-
-    let returnArr = [$openTag,$closeTag]
-    return returnArr
-endfunction
-
-function! AddBlockQuote(lnNum,prevLn)
-    if indent(a:lnNum)>indent(a:prevLn)
-        return "<div style=\"padding-left:20px;\">".$newline
-    elseif indent(a:lnNum)<indent(a:prevLn)
-        let $returnVal = ''
-        let closes = indent(a:prevLn)/&shiftwidth-indent(a:lnNum)/&shiftwidth
-        let j = 0
-        while j< closes
-            let $returnVal .=$newline."</div>"
-            let j+=1
-        endwhile
-        return $returnVal
-    else
-        return ""
-    endif
-endfunction
-
-function! AddUnderlineTags(lineInput)
-    let $returnVal = a:lineInput
-    let switch = 1
-    while match($returnVal,'`')!=-1
-        if switch
-            let $replaceVal = "<u>"
-        else
-            let $replaceVal = "</u>"
         endif
-        let $returnVal = substitute($returnVal,'`',$replaceVal,'')
-        let switch = !switch
-    endwhile
-    return $returnVal
-endfunction
 
-function! GetExampleArray(lineNum)
-    let $returnStr = '<pre>'
-    let currLineNum = a:lineNum+1
-    let currLineStr = getline(currLineNum)
-    while match(currLineStr,'^\(\s\+\)\?\(endex\|@end=.*@\)')==-1
-        let $returnStr .= $newline.currLineStr
-        let currLineNum+=1
-        let currLineStr = getline(currLineNum)
+        if $line == '</head>'
+            " Tack this on in a tackily tacky way.
+            let $lineDum = '<style>div{font-size:1.75em;}</style>' . $line
+            call setline(i, $lineDum)
+        endif
+
+        if $line == '<body>'
+            let $isOn = 1
+        elseif $line == '</body>'
+            let $isOn = 0
+        endif
+
+        let i+=1
+
     endwhile
-    let $returnStr .= "</pre>"
-    return [$returnStr,currLineNum]
+
+    let $dumvar = a:outputFile
+    " I don't know why I have to do this, but I do.
+    sav $dumvar
+    " Note: Force saving is useful when debugging, but I don't want it in
+    " practice.
+    q!
+
+    set number
+    set relativenumber
+
+    " Note: On the off-chance that anybody's reading this and actually using it,
+    " sorry if you don't like these settings, but I'm feeling way too lazy right
+    " now to look up whatever bizarre method vimL would need to use to set this
+    " correctly.  I pretty much always have number and relativenumber set.
+
 endfunction
