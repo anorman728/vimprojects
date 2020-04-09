@@ -35,6 +35,7 @@ behave xterm
 "       d = create new directory.
 "       % = create new file.
 "   Remove "control" characters (those annoying things that start with ^) with [[:cntrl:]]
+
 "   Default settings are usually in /usr/share/vim/vim74/ (or another number for a different version)
 
 "   Use "=" to automatically set spacing according to current syntax.
@@ -48,6 +49,8 @@ behave xterm
 "   fold something with bad indentation.)
 "   Create a fold in manual mode with zf, and destroy it with zd or zD to delete
 "   recursively.
+
+" Non-greedy match in Vim regex is .\{-}
 
 
 " Settings
