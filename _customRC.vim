@@ -230,6 +230,10 @@ behave xterm
         " frustrating for file shortcuts, they're really useful for bookmarks
         " within a single file.
 
+    " Disable recording file marks to viminfo.
+        " This prevents vim from saving "file marks" which are *far* too easy to accidentally trigger.
+        set viminfo='0,f0
+
 " Macros
     " Use @l to replace space after cursor with underscore and capitalize
     " current word.
