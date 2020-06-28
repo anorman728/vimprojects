@@ -122,14 +122,14 @@ behave xterm
     "   kind of annoying.)
     " Need to do this *here* rather than when setting color scheme because
     "   "syntax on" will change it back.
-        "hi Folded ctermbg=8
+        hi Folded ctermbg=0
 
     " Darken text of folded lines so they don't get in the way.
         "hi Folded ctermfg=Black
 
     " Misc color settings for terminal.
         " Remove weird colors for errors.
-        hi Error ctermbg=8
+        hi Error ctermbg=0
         hi Error ctermfg=1
         " Change special color to orange.
         hi Special ctermfg=3
