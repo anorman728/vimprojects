@@ -1,5 +1,8 @@
 " Functions
 
+" There are several functions here that are years old and I haven't used in a
+" really long time.  I'll probably want to clean them up sometime.
+
 " Font size function
     " It's insanely hard to remember the commands for this because it's so finicky.
     function! FontSize(newsize)
@@ -269,3 +272,17 @@
         normal gg=G
         g/^$/d
     endfunction
+
+
+" Open current file as HTML in LibreOffice.  This is useful for being able to
+" copy-paste into Gmail.
+
+" Note that current iteration will definitely not work in Windows or WSL.  Will
+" want to change that someday.
+
+function! ForPasting()
+    TOhtml
+    sav! /tmp/tmpfile.html
+    q
+    ! libreoffice --writer /tmp/tmpfile.html
+endfunction
