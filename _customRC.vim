@@ -52,6 +52,8 @@ behave xterm
 
 " Non-greedy match in Vim regex is .\{-}
 
+" To ignore all whitespace in vim diff, `set diffopt+=iwhite`.
+
 
 " Settings
 
