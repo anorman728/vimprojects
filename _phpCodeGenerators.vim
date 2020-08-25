@@ -38,7 +38,7 @@
         call InsertLine(Increment(), ' */')
         call InsertLine(Increment(), 'public function get'.propercase.'(): '.a:type)
         call InsertLine(Increment(), '{')
-        call InsertLine(Increment(), '   return $this->'.a:variable.';')
+        call InsertLine(Increment(), '    return $this->'.a:variable.';')
         call InsertLine(Increment(), '}')
     endfunction
 
