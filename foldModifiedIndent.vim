@@ -1,9 +1,14 @@
-"   New version: Every space at the beginning of a line is an indent level.
-"   Useful for docblocks.
+" For jerks that use tab lengths other than 4, can call this function manually
+" with a different tab width value.
+function! CustomFolding(width)
 
-set foldmethod=expr
-set foldexpr=ModifiedIndent(v:lnum)
-set foldlevel=99
+    let &shiftwidth=a:width
+
+    set foldmethod=expr
+    set foldexpr=ModifiedIndent(v:lnum)
+    set foldlevel=99
+
+endfunction
 
 " foldignorearray defines patterns to determines what lines to ignore when
 " assigning it a fold level.  If any of these patterns are found anywhere on the
@@ -39,6 +44,8 @@ function! ModifiedIndentLevel(lnum)
     endif
     return float2nr(ceil(str2float(indent(a:lnum))/str2float(&shiftwidth)))
 endfunction
+
+call CustomFolding(&shiftwidth)
 
 
 " Here is a previous version of the inside of the conditional.  It made the folds
