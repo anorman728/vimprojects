@@ -128,6 +128,7 @@ behave xterm
 
     " Darken text of folded lines so they don't get in the way.
         "hi Folded ctermfg=Black
+        hi Folded ctermbg=Black
 
     " Misc color settings for terminal.
         " Remove weird colors for errors.
@@ -135,6 +136,8 @@ behave xterm
         hi Error ctermfg=1
         " Change special color to orange.
         hi Special ctermfg=3
+
+        hi Identifier ctermfg=11
 
     " Change the way folded lines look.
         " Yanked and modified from here-- https://stackoverflow.com/questions/33281187/how-to-change-the-way-that-vim-display-those-collapsed-folded-lines#33281531
