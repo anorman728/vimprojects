@@ -42,6 +42,9 @@ behave xterm
 
 "   Use command TOhtml (can be used with highlighted code) to generate HTML text of code.
 
+"   Use `set optionname?` to see current value of option name. (like `set ic?`)
+"   Use `verbose set optionname?` to see the value and what script last set it.
+
 "   Note on folding:  If your fold method is expr and you switch to manual, the
 "   foldlevel of each line that was set by expr is not changed.  That means you
 "   can change to manual fold level without losing any existing folds (whether
@@ -137,7 +140,7 @@ behave xterm
         " Change special color to orange.
         hi Special ctermfg=3
 
-        hi Identifier ctermfg=11
+        hi Identifier ctermfg=Brown
 
     " Change the way folded lines look.
         " Yanked and modified from here-- https://stackoverflow.com/questions/33281187/how-to-change-the-way-that-vim-display-those-collapsed-folded-lines#33281531
@@ -282,8 +285,12 @@ behave xterm
     source $Mappings
 
     let $FileList = $currentDir."/FileList.vim"
-    call SourceIfNotSourced($FileList)
+    "call SourceIfNotSourced($FileList)
     " Don't resource this if already sourced, because causes problems if vimrc is reloaded on each file.
+    " Commenting this out because I never use it.
+
+    let $LineHighlighting = $currentDir."/LineHighlighting.vim"
+    source $LineHighlighting
 
     " Sandbox to quickly and easily open and source scripts.  Does not matter if
     " already exists, as long as the location is writeable.
