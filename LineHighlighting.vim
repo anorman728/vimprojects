@@ -13,7 +13,7 @@ endfunction
 
 function! ResetHighlighted()
     let s:highlightedRows = []
-    let s:highlightedColor = 'Yellow'
+    let s:highlightedColor = 'Blue'
     call UpdateHighlighted()
 endfunction
 
