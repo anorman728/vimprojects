@@ -137,10 +137,10 @@ behave xterm
         " Remove weird colors for errors.
         hi Error ctermbg=0
         hi Error ctermfg=1
-        " Change special color to orange.
+        " Change some colors to orange.
         hi Special ctermfg=3
-
-        hi Identifier ctermfg=Brown
+        hi Identifier ctermfg=3
+        hi Function ctermfg=LightYellow
 
     " Change the way folded lines look.
         " Yanked and modified from here-- https://stackoverflow.com/questions/33281187/how-to-change-the-way-that-vim-display-those-collapsed-folded-lines#33281531
