@@ -80,12 +80,14 @@ function! GetPasswordIntermediate(lineNum)
     echo getline(a:lineNum+1)
     let $password = substitute(getline(a:lineNum+2),'^.\{-}:','','')
     let $password = substitute($password, '"', '\\"', 'g')
+    " Trying to use single quotes breaks it.
+    let $password = substitute($password, '\$', '\\$', 'g')
     if ($isWSL)
-        let $cmdDum = "echo '".$password."' | /mnt/c/Windows/System32/clip.exe"
+        let $cmdDum = "echo \"".$password."\" | /mnt/c/Windows/System32/clip.exe"
         call system($cmdDum)
         call system('sleep 60 && echo "" | /mnt/c/Windows/System32/clip.exe &')
     else
-        let $cmdDum = "echo '".$password."' | xclip -selection c"
+        let $cmdDum = "echo \"".$password."\" | xclip -selection c"
         call system($cmdDum)
         call system('sleep 60 && echo "" | xclip -selection c &')
     endif
