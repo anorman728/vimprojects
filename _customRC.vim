@@ -57,6 +57,9 @@ behave xterm
 
 " To ignore all whitespace in vim diff, `set diffopt+=iwhite`.
 
+" Setting a file's syntax from within the file requires putting what's called a
+" "modeline" on the first line-- `# vi:syntax=php`
+
 
 " Settings
 
