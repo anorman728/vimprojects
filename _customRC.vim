@@ -73,7 +73,6 @@ behave xterm
 " To backspace past newlines (useful in Termux), `set backspace+=eol`.
 
 
-
 " Settings
 
     " set $CUSTOMRC to this file.
