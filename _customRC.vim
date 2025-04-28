@@ -57,6 +57,22 @@ behave xterm
 
 " To ignore all whitespace in vim diff, `set diffopt+=iwhite`.
 
+" Setting a file's syntax from within the file requires putting what's called a
+" "modeline" on the first line-- `# vi:syntax=php`
+
+" If you see the [1]+ Stopped nonsense, the command "fg" should get back into
+" vim.
+
+" Actually, not much nonsense when you don't have GNU Screen available and it's
+" kind of cool then, and you can do it with Ctrl+Z.
+
+" The one thing that consistently fixes bad syntax highlighting due to folding
+" when nothing else works is :syn sync fromstart, but it apparently slows Vim
+" down quite a bit.
+
+" To backspace past newlines (useful in Termux), `set backspace+=eol`.
+
+
 
 " Settings
 
